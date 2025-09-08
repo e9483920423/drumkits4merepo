@@ -33,62 +33,61 @@
             z-index: -2;
             background: 
                 /* Updated top left color from #FE5800 to rgba(6, 73, 137) */
-                radial-gradient(ellipse at top middle, rgba(255, 94, 0, 1) 10%, transparent 5%), /* Reduced opacity for better blending */
-                radial-gradient(ellipse at bottom right, rgba(18, 35, 42, 0.6) 10%, transparent 10%),
-                radial-gradient(ellipse at center, rgba(11, 44, 62, 0.12) 10%, transparent 20%),
+                radial-gradient(ellipse at top middle, rgba(4, 34, 63, 0.6) 10%, transparent 10%), /* Reduced opacity for better blending */
+                radial-gradient(ellipse at bottom right, rgba(18, 35, 42, 0.6) 10%, transparent 40%),
+                radial-gradient(ellipse at center, rgba(11, 44, 62, 0.12) 10%, transparent 60%),
                 linear-gradient(45deg, #081c24, #0d1f26, #081c24);
             overflow: hidden;
         }
 
         .holographic-layer {
             position: absolute;
-            width: 135%; /* Reduced from 150% to prevent excessive overflow */
+            width: 120%; /* Reduced from 150% to prevent excessive overflow */
             height: 120%;
-            top: 2%; /* Centered the layers to prevent edge visibility */
-            left: 4%;
+            top: -10%; /* Centered the layers to prevent edge visibility */
+            left: -10%;
             background: 
-                conic-gradient(from 0deg at 50% 80%, 
+                conic-gradient(from 0deg at 30% 40%, 
                     rgba(10, 11, 11, 0.12) 0deg, /* Reduced opacity for seamless blending */
                     rgba(51, 80, 96, 0.08) 90deg, 
-                    rgba(16, 24, 29, 0.05) 180deg, 
-                    rgba(23, 23, 23, 0.10) 270deg, 
+                    rgba(16, 24, 29, 0.15) 180deg, 
+                    rgba(23, 23, 23, 0.15) 270deg, 
                     rgba(4, 34, 63, 0.12) 360deg),
-                radial-gradient(circle at 70% 60%, rgba(11, 31, 51, 0.06) 0%, transparent 10%),
-                radial-gradient(circle at 20% 80%, rgba(10, 11, 11, 0.04) 0%, transparent 20%);
+                radial-gradient(circle at 70% 60%, rgba(11, 31, 51, 0.06) 0%, transparent 20%),
+                radial-gradient(circle at 20% 80%, rgba(10, 11, 11, 0.04) 0%, transparent 30%);
             animation: freshHolographicFlow 20s ease-in-out infinite;
-            opacity: 0.08;
             transform-origin: center;
-            filter: blur(100px) opacity(3); /* Increased blur and adjusted opacity for better integration */
+            filter: blur(10px) opacity(0.4); /* Increased blur and adjusted opacity for better integration */
         }
 
         .holographic-layer:nth-child(2) {
             animation-delay: -7s;
             animation-duration: 25s;
-            opacity: 0.02; /* Reduced opacity for darker integration */
+            opacity: 0.2; /* Reduced opacity for darker integration */
             transform: rotate(45deg);
-            filter: blur(85px) opacity(1); /* Enhanced blur for seamless blending */
+            filter: blur(9px) opacity(0.5); /* Enhanced blur for seamless blending */
         }
 
         .holographic-layer:nth-child(3) {
             animation-delay: -14s;
             animation-duration: 30s;
-            opacity: 0.03; /* Further reduced opacity */
+            opacity: 0.10; /* Further reduced opacity */
             transform: rotate(-30deg);
-            filter: blur(80px) opacity(2); /* Maximum blur for deepest layer */
+            filter: blur(10px) opacity(0.4); /* Maximum blur for deepest layer */
         }
 
         .holographic-mesh {
             position: absolute;
-            width: 180%; /* Slightly increased to prevent edge visibility */
-            height: 180%;
-            top: 70%; /* Centered positioning */
-            left: 70%;
+            width: 110%; /* Slightly increased to prevent edge visibility */
+            height: 110%;
+            top: -50%; /* Centered positioning */
+            left: +60%;
             background-image: 
                 repeating-linear-gradient(
                     0deg,
                     rgba(4, 34, 63, 0.015) 0px, /* Reduced opacity for subtle integration */
                     transparent 1px,
-                    transparent 20px,
+                    transparent 40px,
                     rgba(45, 72, 87, 0.015) 41px,
                     transparent 42px
                 ),
@@ -96,7 +95,7 @@
                     90deg,
                     rgba(51, 80, 96, 0.02) 0px,
                     transparent 1px,
-                    transparent 20px,
+                    transparent 40px,
                     rgba(4, 34, 63, 0.015) 41px,
                     transparent 42px
                 );
@@ -115,29 +114,29 @@
                     rgba(51, 80, 96, 0.03), 
                     transparent);
             animation: freshOrbFloat 12s ease-in-out infinite;
-            filter: blur(8px) opacity(0.7); /* Increased blur and adjusted opacity */
+            filter: blur(8px) opacity(0.6); /* Increased blur and adjusted opacity */
         }
 
         @keyframes freshHolographicFlow {
             0%, 100% {
                 transform: rotate(0deg) scale(1) translate(0%, 0%);
-                filter: hue-rotate(0deg) blur(80px) opacity(30.0); /* Consistent blur and opacity */
+                filter: hue-rotate(0deg) blur(8px) opacity(0.5); /* Consistent blur and opacity */
             }
             20% {
                 transform: rotate(1deg) scale(1.05) translate(-2%, 1%); /* Reduced movement range */
-                filter: hue-rotate(20deg) blur(20px) opacity(1);
+                filter: hue-rotate(20deg) blur(8px) opacity(0.8);
             }
             40% {
                 transform: rotate(-0.5deg) scale(0.98) translate(1%, -2%);
-                filter: hue-rotate(-15deg) blur(72px) opacity(1);
+                filter: hue-rotate(-15deg) blur(7px) opacity(0.6);
             }
             60% {
                 transform: rotate(0.8deg) scale(1.02) translate(-1%, 1.5%);
-                filter: hue-rotate(35deg) blur(75px) opacity(1);
+                filter: hue-rotate(35deg) blur(7px) opacity(0.75);
             }
             80% {
                 transform: rotate(-0.4deg) scale(0.99) translate(1.5%, -0.5%);
-                filter: hue-rotate(-10deg) blur(50px) opacity(1);
+                filter: hue-rotate(-10deg) blur(8px) opacity(0.65);
             }
         }
 
@@ -447,9 +446,9 @@
 <body>
     <!-- Updated dynamic background with holographic layers -->
     <div class="dynamic-bg" id="dynamicBg">
-        <div class="holographic-layer" style="opacity: 0.03;"></div>
-        <div class="holographic-layer" style="opacity: 0.01;"></div>
-        <div class="holographic-layer" style="opacity: 0.02;"></div>
+        <div class="holographic-layer"></div>
+        <div class="holographic-layer"></div>
+        <div class="holographic-layer"></div>
         <div class="holographic-mesh"></div>
     </div>
 
