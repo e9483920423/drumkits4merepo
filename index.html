@@ -57,7 +57,7 @@
                 radial-gradient(circle at 20% 80%, rgba(10, 11, 11, 0.04) 0%, transparent 30%);
             animation: freshHolographicFlow 20s ease-in-out infinite;
             transform-origin: center;
-            filter: blur(6px) opacity(0.8); /* Increased blur and adjusted opacity for better integration */
+            filter: blur(8px) opacity(0.8); /* Increased blur and adjusted opacity for better integration */
         }
 
         .holographic-layer:nth-child(2) {
@@ -65,7 +65,7 @@
             animation-duration: 25s;
             opacity: 0.2; /* Reduced opacity for darker integration */
             transform: rotate(45deg);
-            filter: blur(7px) opacity(0.5); /* Enhanced blur for seamless blending */
+            filter: blur(9px) opacity(0.5); /* Enhanced blur for seamless blending */
         }
 
         .holographic-layer:nth-child(3) {
@@ -120,7 +120,7 @@
         @keyframes freshHolographicFlow {
             0%, 100% {
                 transform: rotate(0deg) scale(1) translate(0%, 0%);
-                filter: hue-rotate(0deg) blur(6px) opacity(0.5); /* Consistent blur and opacity */
+                filter: hue-rotate(0deg) blur(8px) opacity(0.5); /* Consistent blur and opacity */
             }
             20% {
                 transform: rotate(1deg) scale(1.05) translate(-2%, 1%); /* Reduced movement range */
