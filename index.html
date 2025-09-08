@@ -888,7 +888,7 @@
 
         document.addEventListener('mousemove', (e) => {
             /* Improved throttling for better scroll performance */
-            if (Date.now() - lastMouseMove < 32) return; // Throttle to ~30fps for better performance
+            if (Date.now() - lastMouseMove < 16) return; // Throttle to ~30fps for better performance
             lastMouseMove = Date.now();
             
             const mouseX = e.clientX / window.innerWidth;
