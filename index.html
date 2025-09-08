@@ -33,9 +33,9 @@
             z-index: -2;
             background: 
                 /* Updated top left color from #FE5800 to rgba(6, 73, 137) */
-                radial-gradient(ellipse at top middle, rgba(4, 34, 63, 0.6) 10%, transparent 10%), /* Reduced opacity for better blending */
-                radial-gradient(ellipse at bottom right, rgba(18, 35, 42, 0.6) 10%, transparent 40%),
-                radial-gradient(ellipse at center, rgba(11, 44, 62, 0.12) 10%, transparent 60%),
+                radial-gradient(ellipse at top middle, rgba(4, 34, 63, 0.6) 10%, transparent 5%), /* Reduced opacity for better blending */
+                radial-gradient(ellipse at bottom right, rgba(18, 35, 42, 0.6) 10%, transparent 10%),
+                radial-gradient(ellipse at center, rgba(11, 44, 62, 0.12) 10%, transparent 20%),
                 linear-gradient(45deg, #081c24, #0d1f26, #081c24);
             overflow: hidden;
         }
@@ -63,7 +63,7 @@
         .holographic-layer:nth-child(2) {
             animation-delay: -7s;
             animation-duration: 25s;
-            opacity: 0.2; /* Reduced opacity for darker integration */
+            opacity: 0.05; /* Reduced opacity for darker integration */
             transform: rotate(45deg);
             filter: blur(9px) opacity(0.5); /* Enhanced blur for seamless blending */
         }
@@ -71,7 +71,7 @@
         .holographic-layer:nth-child(3) {
             animation-delay: -14s;
             animation-duration: 30s;
-            opacity: 0.10; /* Further reduced opacity */
+            opacity: 0.07; /* Further reduced opacity */
             transform: rotate(-30deg);
             filter: blur(10px) opacity(0.4); /* Maximum blur for deepest layer */
         }
@@ -87,7 +87,7 @@
                     0deg,
                     rgba(4, 34, 63, 0.015) 0px, /* Reduced opacity for subtle integration */
                     transparent 1px,
-                    transparent 40px,
+                    transparent 20px,
                     rgba(45, 72, 87, 0.015) 41px,
                     transparent 42px
                 ),
@@ -95,7 +95,7 @@
                     90deg,
                     rgba(51, 80, 96, 0.02) 0px,
                     transparent 1px,
-                    transparent 40px,
+                    transparent 20px,
                     rgba(4, 34, 63, 0.015) 41px,
                     transparent 42px
                 );
