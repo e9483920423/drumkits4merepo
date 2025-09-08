@@ -766,12 +766,12 @@
             </div>
 
             <div class="collapsible-section">
-                <header class="section-header" onclick="toggleSection(this)">
+                <div class="section-header" onclick="toggleSection(this)">
                     <h2>STREAMING</h2>
                     <svg class="collapse-icon" viewBox="0 0 24 24">
                         <path d="M7 10l5 5 5-5z"/>
                     </svg>
-                </header>
+                </div>
                 <section class="section-content">
                     <div class="links-section">
                         <a href="https://hdrezka.website/">https://hdrezka.website/</a>
@@ -885,53 +885,61 @@
         }
 
         let lastMouseMove = 0;
+        let animationFrameId = null;
+        let pendingMouseUpdate = false;
 
         document.addEventListener('mousemove', (e) => {
-            /* Improved throttling for better scroll performance */
-            if (Date.now() - lastMouseMove < 16) return; // Throttle to ~30fps for better performance
-            lastMouseMove = Date.now();
+            if (pendingMouseUpdate) return;
             
-            const mouseX = e.clientX / window.innerWidth;
-            const mouseY = e.clientY / window.innerHeight;
+            pendingMouseUpdate = true;
             
-            const layers = document.querySelectorAll('.holographic-layer');
-            layers.forEach((layer, index) => {
-                /* Further reduced movement intensity to prevent edge visibility */
-                const intensity = (index + 1) * 0.02;
-                const offsetX = (mouseX - 0.5) * intensity * 1;
-                const offsetY = (mouseY - 0.5) * intensity * 1;
-                const rotation = (mouseX - 0.5) * intensity * 0.1;
-                
-                layer.style.transform = `translate3d(${offsetX}px, ${offsetY}px, 0) rotate(${rotation}deg)`;
-            });
-
-            orbs.forEach((orb, index) => {
-                const rect = orb.getBoundingClientRect();
-                const orbX = (rect.left + rect.width / 2) / window.innerWidth;
-                const orbY = (rect.top + rect.height / 2) / window.innerHeight;
-                
-                const distance = Math.sqrt(
-                    Math.pow(mouseX - orbX, 2) + Math.pow(mouseY - orbY, 2)
-                );
-                
-                if (distance < 0.12) {
-                    const force = (0.12 - distance) / 0.12;
-                    const hueShift = force * 20;
-                    orb.style.filter = `hue-rotate(${hueShift}deg) brightness(${1 + force * 0.2}) blur(${12 - force * 2}px) opacity(${0.3 + force * 0.2})`;
-                    orb.style.transform = `scale(${1 + force * 0.2})`;
-                } else {
-                    orb.style.filter = 'blur(10px) opacity(0.2)';
-                    orb.style.transform = 'scale(1)';
-                }
-            });
-
-            const mesh = document.querySelector('.holographic-mesh');
-            if (mesh) {
-                /* Minimal mesh movement to prevent performance issues */
-                const meshOffsetX = (mouseX - 0.5) * 0.5;
-                const meshOffsetY = (mouseY - 0.5) * 0.5;
-                mesh.style.transform = `translate3d(${meshOffsetX}px, ${meshOffsetY}px, 0)`;
+            if (animationFrameId) {
+                cancelAnimationFrame(animationFrameId);
             }
+            
+            animationFrameId = requestAnimationFrame(() => {
+                const mouseX = e.clientX / window.innerWidth;
+                const mouseY = e.clientY / window.innerHeight;
+                
+                const layers = document.querySelectorAll('.holographic-layer');
+                layers.forEach((layer, index) => {
+                    const intensity = (index + 1) * 0.02;
+                    const offsetX = (mouseX - 0.5) * intensity * 1;
+                    const offsetY = (mouseY - 0.5) * intensity * 1;
+                    const rotation = (mouseX - 0.5) * intensity * 0.1;
+                    
+                    layer.style.transform = `translate3d(${offsetX}px, ${offsetY}px, 0) rotate(${rotation}deg)`;
+                });
+
+                orbs.forEach((orb, index) => {
+                    const rect = orb.getBoundingClientRect();
+                    const orbX = (rect.left + rect.width / 2) / window.innerWidth;
+                    const orbY = (rect.top + rect.height / 2) / window.innerHeight;
+                    
+                    const distance = Math.sqrt(
+                        Math.pow(mouseX - orbX, 2) + Math.pow(mouseY - orbY, 2)
+                    );
+                    
+                    if (distance < 0.12) {
+                        const force = (0.12 - distance) / 0.12;
+                        const hueShift = force * 20;
+                        orb.style.filter = `hue-rotate(${hueShift}deg) brightness(${1 + force * 0.2}) blur(${12 - force * 2}px) opacity(${0.3 + force * 0.2})`;
+                        orb.style.transform = `scale(${1 + force * 0.2})`;
+                    } else {
+                        orb.style.filter = 'blur(10px) opacity(0.2)';
+                        orb.style.transform = 'scale(1)';
+                    }
+                });
+
+                const mesh = document.querySelector('.holographic-mesh');
+                if (mesh) {
+                    const meshOffsetX = (mouseX - 0.5) * 0.5;
+                    const meshOffsetY = (mouseY - 0.5) * 0.5;
+                    mesh.style.transform = `translate3d(${meshOffsetX}px, ${meshOffsetY}px, 0)`;
+                }
+                
+                pendingMouseUpdate = false;
+            });
         });
 
         function updateHolographicColors() {
