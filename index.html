@@ -25,12 +25,14 @@
         /* Redesigned dynamic background with fresh aesthetic */
         .dynamic-bg {
             position: fixed;
-            top: -50px; /* Extended boundaries to prevent edge visibility */
-            left: -50px;
-            width: calc(100% + 100px); /* Increased size to cover edges during movement */
-            height: calc(100% + 100px);
+            top: -100vh; /* Extended boundaries significantly to prevent edge visibility during scrolling */
+            left: -100vw;
+            width: calc(100vw + 200vw); /* Increased size to 300% viewport width for seamless coverage */
+            height: calc(100vh + 200vh); /* Increased size to 300% viewport height for seamless coverage */
             pointer-events: none;
             z-index: -2;
+            /* Added will-change for better scroll performance */
+            will-change: transform;
             background: 
                 /* Updated top left color from #FE5800 to rgba(6, 73, 137) */
                 radial-gradient(ellipse at top middle, rgba(4, 34, 63, 0.6) 10%, transparent 10%), /* Reduced opacity for better blending */
@@ -38,14 +40,16 @@
                 radial-gradient(ellipse at center, rgba(11, 44, 62, 0.12) 10%, transparent 60%),
                 linear-gradient(45deg, #081c24, #0d1f26, #081c24);
             overflow: hidden;
+            /* Added transform3d for hardware acceleration during scroll */
+            transform: translate3d(0, 0, 0);
         }
 
         .holographic-layer {
             position: absolute;
-            width: 120%; /* Reduced from 150% to prevent excessive overflow */
-            height: 120%;
-            top: -10%; /* Centered the layers to prevent edge visibility */
-            left: -10%;
+            width: 200%; /* Increased from 120% to 200% for better edge coverage */
+            height: 200%; /* Increased from 120% to 200% for better edge coverage */
+            top: -50%; /* Centered positioning with larger negative margins */
+            left: -50%; /* Centered positioning with larger negative margins */
             background: 
                 conic-gradient(from 0deg at 30% 40%, 
                     rgba(10, 11, 11, 0.12) 0deg, /* Reduced opacity for seamless blending */
@@ -57,50 +61,54 @@
                 radial-gradient(circle at 20% 80%, rgba(10, 11, 11, 0.04) 0%, transparent 30%);
             animation: freshHolographicFlow 20s ease-in-out infinite;
             transform-origin: center;
-            filter: blur(10px) opacity(0.4); /* Increased blur and adjusted opacity for better integration */
+            filter: blur(15px) opacity(0.3); /* Increased blur from 10px to 15px for smoother edges */
+            /* Added transform3d for hardware acceleration */
+            transform: translate3d(0, 0, 0);
         }
 
         .holographic-layer:nth-child(2) {
             animation-delay: -7s;
             animation-duration: 25s;
-            opacity: 0.2; /* Reduced opacity for darker integration */
-            transform: rotate(45deg);
-            filter: blur(9px) opacity(0.5); /* Enhanced blur for seamless blending */
+            opacity: 0.15; /* Reduced opacity for better edge blending */
+            transform: rotate(45deg) translate3d(0, 0, 0); /* Added translate3d */
+            filter: blur(18px) opacity(0.4); /* Increased blur from 9px to 18px */
         }
 
         .holographic-layer:nth-child(3) {
             animation-delay: -14s;
             animation-duration: 30s;
-            opacity: 0.10; /* Further reduced opacity */
-            transform: rotate(-30deg);
-            filter: blur(10px) opacity(0.4); /* Maximum blur for deepest layer */
+            opacity: 0.08; /* Further reduced opacity */
+            transform: rotate(-30deg) translate3d(0, 0, 0); /* Added translate3d */
+            filter: blur(20px) opacity(0.3); /* Increased blur from 10px to 20px */
         }
 
         .holographic-mesh {
             position: absolute;
-            width: 110%; /* Slightly increased to prevent edge visibility */
-            height: 110%;
-            top: -50%; /* Centered positioning */
-            left: +60%;
+            width: 200%; /* Increased from 110% to 200% for better coverage */
+            height: 200%; /* Increased from 110% to 200% for better coverage */
+            top: -100%; /* Adjusted positioning for larger size */
+            left: -50%; /* Adjusted positioning for larger size */
             background-image: 
                 repeating-linear-gradient(
                     0deg,
-                    rgba(4, 34, 63, 0.015) 0px, /* Reduced opacity for subtle integration */
+                    rgba(4, 34, 63, 0.01) 0px, /* Further reduced opacity for seamless integration */
                     transparent 1px,
                     transparent 40px,
-                    rgba(45, 72, 87, 0.015) 41px,
+                    rgba(45, 72, 87, 0.01) 41px, /* Further reduced opacity */
                     transparent 42px
                 ),
                 repeating-linear-gradient(
                     90deg,
-                    rgba(51, 80, 96, 0.02) 0px,
+                    rgba(51, 80, 96, 0.015) 0px, /* Further reduced opacity */
                     transparent 1px,
                     transparent 40px,
-                    rgba(4, 34, 63, 0.015) 41px,
+                    rgba(4, 34, 63, 0.01) 41px, /* Further reduced opacity */
                     transparent 42px
                 );
             animation: meshDrift 40s linear infinite;
-            opacity: 1; /* Added opacity control for better blending */
+            opacity: 0.8; /* Reduced opacity for better blending */
+            /* Added transform3d for hardware acceleration */
+            transform: translate3d(0, 0, 0);
         }
 
         .holographic-orb {
@@ -119,24 +127,24 @@
 
         @keyframes freshHolographicFlow {
             0%, 100% {
-                transform: rotate(0deg) scale(1) translate(0%, 0%);
-                filter: hue-rotate(0deg) blur(8px) opacity(0.5); /* Consistent blur and opacity */
+                transform: rotate(0deg) scale(1) translate3d(0%, 0%, 0); /* Added translate3d and reduced movement */
+                filter: hue-rotate(0deg) blur(15px) opacity(0.4); /* Increased blur for smoother transitions */
             }
             20% {
-                transform: rotate(1deg) scale(1.05) translate(-2%, 1%); /* Reduced movement range */
-                filter: hue-rotate(20deg) blur(8px) opacity(0.8);
+                transform: rotate(0.5deg) scale(1.02) translate3d(-1%, 0.5%, 0); /* Reduced movement range significantly */
+                filter: hue-rotate(20deg) blur(15px) opacity(0.6);
             }
             40% {
-                transform: rotate(-0.5deg) scale(0.98) translate(1%, -2%);
-                filter: hue-rotate(-15deg) blur(7px) opacity(0.6);
+                transform: rotate(-0.3deg) scale(0.99) translate3d(0.5%, -1%, 0); /* Reduced movement range */
+                filter: hue-rotate(-15deg) blur(14px) opacity(0.5);
             }
             60% {
-                transform: rotate(0.8deg) scale(1.02) translate(-1%, 1.5%);
-                filter: hue-rotate(35deg) blur(7px) opacity(0.75);
+                transform: rotate(0.4deg) scale(1.01) translate3d(-0.5%, 0.8%, 0); /* Reduced movement range */
+                filter: hue-rotate(35deg) blur(14px) opacity(0.65);
             }
             80% {
-                transform: rotate(-0.4deg) scale(0.99) translate(1.5%, -0.5%);
-                filter: hue-rotate(-10deg) blur(8px) opacity(0.65);
+                transform: rotate(-0.2deg) scale(0.995) translate3d(0.8%, -0.3%, 0); /* Reduced movement range */
+                filter: hue-rotate(-10deg) blur(15px) opacity(0.55);
             }
         }
 
@@ -462,7 +470,7 @@
             <div class="social-links">
                 <a href="https://discord.gg/kits4leaks" class="discord-logo">
                     <svg viewBox="0 0 24 24">
-                        <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.077.077 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"/>
+                        <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.076.076 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.077.077 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.946-2.418-2.157 2.418z"/>
                     </svg>
                 </a>
                 <a href="https://t.me/+FDbUFVvalN1hZTcx" class="telegram-logo">
@@ -471,7 +479,7 @@
                     </svg>
                 </a>
             </div>
-        </div>
+        </nav>
 
         <nav class="news-section">
             <!-- Made K4L NEWS the main header with twice the size and primary color -->
@@ -754,15 +762,15 @@
             <section class="section-content">
                 <div class="links-section">
                     <a href="https://hdrezka.website/">https://hdrezka.website/</a>
-                    <a href="https://veloratv.ru/">https://veloratv.ru/<a>
-                    <a href="https://watch.spencerdevs.xyz/">https://watch.spencerdevs.xyz/<a>
+                    <a href="https://veloratv.ru/">https://veloratv.ru/</a>
+                    <a href="https://watch.spencerdevs.xyz/">https://watch.spencerdevs.xyz/</a>
                     <a href="https://fmoviesto.cc/watch-tv/">https://fmoviesto.cc/watch-tv/</a>
-                    <a href="https://xprime.tv/">https://xprime.tv/<a>
+                    <a href="https://xprime.tv/">https://xprime.tv/</a>
                     <a href="https://www.vidbinge.com/">https://www.vidbinge.com/</a>
                     <a href="https://www.nepu.to/">https://www.nepu.to/</a>
                     <a href="https://alienflix.net">https://alienflix.net</a>
-                    <a href="https://www.cineby.app/">https://www.cineby.app/<a>
-                    <a href="https://www.fmovies.gd/">https://www.fmovies.gd/<a>
+                    <a href="https://www.cineby.app/">https://www.cineby.app/</a>
+                    <a href="https://www.fmovies.gd/">https://www.fmovies.gd/</a>
                     <a href="https://cinemaos.live/">https://cinemaos.live/</a>
                 </div>
             </section>
@@ -812,7 +820,7 @@
            <a href="https://www.reddit.com/r/kits4reddit/">KITS4REDDIT</a>
            </p>
         </div>
-    </div>
+    </header>
       <!-- Particle system with holographic background script -->
     <script>
         function toggleSection(header) {
@@ -868,12 +876,12 @@
             
             const layers = document.querySelectorAll('.holographic-layer');
             layers.forEach((layer, index) => {
-                const intensity = (index + 1) * 0.15; /* Reduced intensity to prevent edge visibility */
-                const offsetX = (mouseX - 0.5) * intensity * 10; /* Reduced movement range */
-                const offsetY = (mouseY - 0.5) * intensity * 10;
-                const rotation = (mouseX - 0.5) * intensity * 1;
+                const intensity = (index + 1) * 0.08; /* Reduced intensity from 0.15 to 0.08 to prevent edge visibility */
+                const offsetX = (mouseX - 0.5) * intensity * 5; /* Reduced movement range from 10 to 5 */
+                const offsetY = (mouseY - 0.5) * intensity * 5; /* Reduced movement range from 10 to 5 */
+                const rotation = (mouseX - 0.5) * intensity * 0.5; /* Reduced rotation from 1 to 0.5 */
                 
-                layer.style.transform = `translate(${offsetX}px, ${offsetY}px) rotate(${rotation}deg)`;
+                layer.style.transform = `translate3d(${offsetX}px, ${offsetY}px, 0) rotate(${rotation}deg)`; /* Added translate3d for better performance */
             });
 
             orbs.forEach((orb, index) => {
@@ -898,9 +906,9 @@
 
             const mesh = document.querySelector('.holographic-mesh');
             if (mesh) {
-                const meshOffsetX = (mouseX - 0.5) * 5; /* Reduced movement range */
-                const meshOffsetY = (mouseY - 0.5) * 5;
-                mesh.style.transform = `translate(${meshOffsetX}px, ${meshOffsetY}px)`;
+                const meshOffsetX = (mouseX - 0.5) * 2; /* Reduced movement range from 5 to 2 */
+                const meshOffsetY = (mouseY - 0.5) * 2; /* Reduced movement range from 5 to 2 */
+                mesh.style.transform = `translate3d(${meshOffsetX}px, ${meshOffsetY}px, 0)`; /* Added translate3d for better performance */
             }
         });
 
