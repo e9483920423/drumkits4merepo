@@ -3,6 +3,18 @@
   "outputDirectory": "./",
   "installCommand": "echo 'No dependencies to install'",
   "framework": null,
+  "redirects": [
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/megathread.html",
+      "destination": "/megathread",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/megathread",
