@@ -9,6 +9,10 @@
       "destination": "/megathread.html"
     },
     {
+      "source": "/",
+      "destination": "/index.html"
+    },
+    {
       "source": "/((?!megathread).*)",
       "destination": "/index.html"
     }
