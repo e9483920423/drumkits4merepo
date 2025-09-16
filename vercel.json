@@ -6,11 +6,11 @@
   "rewrites": [
     {
       "source": "/megathread",
-      "destination": "/megathread.html"
+      "destination": "/megathread"
     },
     {
       "source": "/((?!megathread).*)",
-      "destination": "/index.html"
+      "destination": "/index"
     }
   ]
 }
