@@ -5,8 +5,12 @@
   "framework": null,
   "rewrites": [
     {
-      "source": "/(.*)",
-      "destination": "/index.html"
+      "source": "/megathread",
+      "destination": "/megathread"
+    },
+    {
+      "source": "/((?!megathread).*)",
+      "destination": "/index"
     }
   ]
 }
