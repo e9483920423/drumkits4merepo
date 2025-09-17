@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kits4Leaks Library</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+        background-color: #0a0a0a;
+        color: #ffffff;
+        line-height: 1.4;
+      }
+
+      .container {
+        display: flex;
+        min-height: 100vh;
+      }
+
+      /* Sidebar */
+      /* Removed entire sidebar CSS section */
+
+      /* Home link styles */
+      .home-link {
+        text-decoration: none;
+      }
+
+      /* Updated sidebar-icon styles for header placement */
+      .sidebar-icon {
+        width: 40px;
+        height: 40px;
+        background-color: #1a1a1a;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background-color 0.2s;
+      }
+
+      .sidebar-icon:hover {
+        background-color: #2a2a2a;
+      }
+
+      .sidebar-icon.active {
+        background-color: #8b5cf6;
+      }
+
+      /* Main Content */
+      .main-content {
+        flex: 1;
+        /* Removed margin-left since sidebar is gone */
+        padding: 0;
+      }
+
+      /* Header */
+      .header {
+        background-color: #111111;
+        padding: 20px 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid #222222;
+      }
+
+      .logo-section {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .logo {
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(135deg, #8b5cf6, #ec4899);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 18px;
+      }
+
+      .title {
+        font-size: 24px;
+        font-weight: 600;
+      }
+
+      .library-text {
+        font-size: 14px;
+        color: #888888;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .search-section {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+      }
+
+      .controls {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .control-group {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 14px;
+        color: #888888;
+      }
+
+      .platform-switch {
+        background-color: #1a1a1a;
+        border: 1px solid #333333;
+        border-radius: 8px;
+        padding: 8px 16px;
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 14px;
+        transition: background-color 0.2s;
+      }
+
+      .platform-switch:hover {
+        background-color: #2a2a2a;
+      }
+
+      .sorting-buttons {
+        display: flex;
+        gap: 8px;
+        margin-left: 10px;
+      }
+
+      .sort-btn {
+        background-color: #1a1a1a;
+        border: 1px solid #333333;
+        border-radius: 6px;
+        padding: 6px 12px;
+        color: #888888;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        text-transform: uppercase;
+      }
+
+      .sort-btn:hover {
+        background-color: #2a2a2a;
+        color: #ffffff;
+      }
+
+      .sort-btn.active {
+        background-color: #8b5cf6;
+        border-color: #8b5cf6;
+        color: #ffffff;
+      }
+
+      /* Content Area */
+      .content {
+        padding: 40px;
+      }
+
+      .section {
+        margin-bottom: 60px;
+      }
+
+      .section-title {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 30px;
+        color: #ffffff;
+      }
+
+      .software-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 20px;
+      }
+
+      .software-card {
+        background-color: #111111;
+        border: 1px solid #222222;
+        border-radius: 12px;
+        padding: 14px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        height: 120px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .software-card:hover {
+        background-color: #1a1a1a;
+        border-color: #333333;
+        transform: translateY(-2px);
+      }
+
+      .card-header {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        flex: 1;
+      }
+
+      .software-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center; /* Added horizontal centering */
+        height: 100%;
+        text-align: center;
+        width: 100%; /* Added full width to ensure proper centering */
+      }
+
+      .software-info h3 {
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 4px;
+        width: 100%; /* Added full width for consistent centering */
+      }
+
+      .software-developer {
+        font-size: 14px;
+        color: #888888;
+        width: 100%; /* Added full width for consistent centering */
+      }
+
+      .software-version {
+        font-size: 12px;
+        color: #666666;
+        margin-top: 8px;
+        width: 100%; /* Added full width for consistent centering */
+      }
+
+      /* Main software section - blue theme */
+      .section:nth-child(1) .software-card h3 {
+        color: #60a5fa;
+      }
+
+      .section:nth-child(1) .software-card:hover {
+        box-shadow: 0 0 20px rgba(96, 165, 250, 0.3);
+        border-color: #60a5fa;
+      }
+
+      /* VSTs section - purple theme */
+      .section:nth-child(2) .software-card h3 {
+        color: #a855f7;
+      }
+
+      .section:nth-child(2) .software-card:hover {
+        box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+        border-color: #a855f7;
+      }
+
+      /* KITs section - green theme */
+      .section:nth-child(3) .software-card h3 {
+        color: #34d399;
+      }
+
+      .section:nth-child(3) .software-card:hover {
+        box-shadow: 0 0 20px rgba(52, 211, 153, 0.3);
+        border-color: #34d399;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        /* Removed sidebar responsive styles */
+
+        .header {
+          padding: 15px 20px;
+          flex-direction: column;
+          gap: 15px;
+        }
+
+        .search-section {
+          width: 100%;
+          justify-content: space-between;
+        }
+
+        .content {
+          padding: 20px;
+        }
+
+        .software-grid {
+          grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+          gap: 15px;
+        }
+
+        .sorting-buttons {
+          flex-wrap: wrap;
+          gap: 4px;
+        }
+
+        .sort-btn {
+          padding: 4px 8px;
+          font-size: 11px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .software-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .header {
+          padding: 10px 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Removed entire sidebar section -->
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <!-- Header -->
+        <header class="header">
+          <div class="logo-section">
+            <!-- Added sidebar-icon active to header -->
+            <a href="index.html" class="home-link">
+              <div class="sidebar-icon active">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-house"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"
+                  />
+                </svg>
+              </div>
+            </a>
+            <a href="#" class="platform-switch">MEGATHREAD</a>
+            <div>
+              <div class="title">Library</div>
+              <div class="library-text">(K4L)</div>
+            </div>
+          </div>
+
+          <div class="search-section">
+            <div class="controls">
+              <div class="control-group">
+                <span>🔗</span>
+                <span><strong>>SORTING</strong></span>
+                <div class="sorting-buttons">
+                  <button class="sort-btn active" data-filter="all">ALL</button>
+                  <button class="sort-btn" data-filter="misc">MISC</button>
+                  <button class="sort-btn" data-filter="vsts">VSTS</button>
+                  <button class="sort-btn" data-filter="kits">KITS</button>
+                </div>
+              </div>
+
+              <div class="control-group">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-discord"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M13.545 2.907a13.2 13.2 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.2 12.2 0 0 0-3.658 0 8 8 0 0 0-.412-.833.05.05 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.04.04 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032q.003.022.021.037a13.3 13.3 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019q.463-.63.818-1.329a.05.05 0 0 0-.01-.059l-.018-.011a9 9 0 0 1-1.248-.595.05.05 0 0 1-.02-.066l.015-.019q.127-.095.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.05.05 0 0 1 .053.007q.121.1.248.195a.05.05 0 0 1-.004.085 8 8 0 0 1-1.249.594.05.05 0 0 0-.03.03.05.05 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.2 13.2 0 0 0 4.001-2.02.05.05 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.03.03 0 0 0-.02-.019m-8.198 7.307c-.789 0-1.438-.724-1.438-1.612s.637-1.613 1.438-1.613c.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612m5.316 0c-.788 0-1.438-.724-1.438-1.612s.637-1.613 1.438-1.613c.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612m-5.316 0c-.788 0-1.438-.724-1.438-1.612s.637-1.613 1.438-1.613c.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612"
+                  />
+                </svg>
+                <span>(BETA)</span>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <!-- Content -->
+        <div class="content">
+          <!-- Main Software Section -->
+          <section class="section" data-category="misc">
+            <h2 class="section-title">Misc</h2>
+            <div class="software-grid">
+              <a
+                href="https://example.com"
+                target="_blank"
+                style="text-decoration: none; color: inherit"
+              >
+                <div class="software-card">
+                  <div class="card-header">
+                    <div class="software-info">
+                      <h3>FL Studio</h3>
+                      <div class="software-developer">Image-Line</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a
+                href="https://example.com"
+                target="_blank"
+                style="text-decoration: none; color: inherit"
+              >
+                <div class="software-card">
+                  <div class="card-header">
+                    <div class="software-info">
+                      <h3>Cubase</h3>
+                      <div class="software-developer">Steinberg</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a
+                href="https://b2.gangsloni.com/file/gangsloni/win/daw/Guitar_Pro.zip"
+                target="_blank"
+                style="text-decoration: none; color: inherit"
+              >
+                <div class="software-card">
+                  <div class="card-header">
+                    <div class="software-info">
+                      <h3>Guitar Pro</h3>
+                      <div class="software-developer">Arobas Music</div>
+                      <div class="software-version">8.0.2 Build 24 DAW</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a
+                href="https://example.com"
+                target="_blank"
+                style="text-decoration: none; color: inherit"
+              >
+                <div class="software-card">
+                  <div class="card-header">
+                    <div class="software-info">
+                      <h3>Studio One</h3>
+                      <div class="software-developer">PreSonus</div>
+                      <div class="software-version">6.5.0</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a
+                href="https://example.com"
+                target="_blank"
+                style="text-decoration: none; color: inherit"
+              >
+                <div class="software-card">
+                  <div class="card-header">
+                    <div class="software-info">
+                      <h3>Mixcraft 10</h3>
+                      <div class="software-developer">Acoustica</div>
+                      <div class="software-version">10.1 Build 587</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a
+                href="https://example.com"
+                target="_blank"
+                style="text-decoration: none; color: inherit"
+              >
+                <div class="software-card">
+                  <div class="card-header">
+                    <div class="software-info">
+                      <h3>Ableton Live</h3>
+                      <div class="software-developer">Ableton</div>
+                      <div class="software-version">12.1.0</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a
+                href="https://example.com"
+                target="_blank"
+                style="text-decoration: none; color: inherit"
+              >
+                <div class="software-card">
+                  <div class="card-header">
+                    <div class="software-info">
+                      <h3>future.dj pro</h3>
+                      <div class="software-developer">Xylio</div>
+                      <div class="software-version">1.10.0</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a
+                href="https://example.com"
+                target="_blank"
+                style="text-decoration: none; color: inherit"
+              >
+                <div class="software-card">
+                  <div class="card-header">
+                    <div class="software-info">
+                      <h3>Bitwig Studio</h3>
+                      <div class="software-developer">Bitwig</div>
+                      <div class="software-version">5.0.4</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a
+                href="https://example.com"
+                target="_blank"
+                style="text-decoration: none; color: inherit"
+              >
+                <div class="software-card">
+                  <div class="card-header">
+                    <div class="software-info">
+                      <h3>Pro Tools</h3>
+                      <div class="software-developer">Avid</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a
+                href="https://example.com"
+                target="_blank"
+                style="text-decoration: none; color: inherit"
+              >
+                <div class="software-card">
+                  <div class="card-header">
+                    <div class="software-info">
+                      <h3>Reason</h3>
+                      <div class="software-developer">Reason Studios</div>
+                      <div class="software-version">12.2.5</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a
+                href="https://example.com"
+                target="_blank"
+                style="text-decoration: none; color: inherit"
+              >
+                <div class="software-card">
+                  <div class="card-header">
+                    <div class="software-info">
+                      <h3>Waveform</h3>
+                      <div class="software-developer">Tracktion</div>
+                      <div class="software-version">13.0.32</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a
+                href="https://example.com"
+                target="_blank"
+                style="text-decoration: none; color: inherit"
+              >
+                <div class="software-card">
+                  <div class="card-header">
+                    <div class="software-info">
+                      <h3>VST Live</h3>
+                      <div class="software-developer">Steinberg</div>
+                      <div class="software-version">2.1.21</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </section>
+
+          <!-- VSTs Section -->
+          <section class="section" data-category="vsts">
+            <h2 class="section-title">VSTs</h2>
+            <div class="software-grid">
+              <a
+                href="https://example.com"
+                target="_blank"
+                style="text-decoration: none; color: inherit"
+              >
+                <div class="software-card">
+                  <div class="card-header">
+                    <div class="software-info">
+                      <h3>Arcade</h3>
+                      <div class="software-developer">Output</div>
+                      <div class="software-version">2.2.0</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a
+                href="https://example.com"
+                target="_blank"
+                style="text-decoration: none; color: inherit"
+              >
+                <div class="software-card">
+                  <div class="card-header">
+                    <div class="software-info">
+                      <h3>FabFilter Total Bundle</h3>
+                      <div class="software-developer">FabFiltery</div>
+                      <div class="software-version">2024.12.11</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a
+                href="https://example.com"
+                target="_blank"
+                style="text-decoration: none; color: inherit"
+              >
+                <div class="software-card">
+                  <div class="card-header">
+                    <div class="software-info">
+                      <h3>HalfTime</h3>
+                      <div class="software-developer">Cableguys</div>
+                      <div class="software-version">1.0.1</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a
+                href="https://example.com"
+                target="_blank"
+                style="text-decoration: none; color: inherit"
+              >
+                <div class="software-card">
+                  <div class="card-header">
+                    <div class="software-info">
+                      <h3>Bundle</h3>
+                      <div class="software-developer">Valhalla</div>
+                      <div class="software-version">Mixed</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a
+                href="https://example.com"
+                target="_blank"
+                style="text-decoration: none; color: inherit"
+              >
+                <div class="software-card">
+                  <div class="card-header">
+                    <div class="software-info">
+                      <h3>Keyscape</h3>
+                      <div class="software-developer">Spectrasonics</div>
+                      <div class="software-version">1.5.1c</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a
+                href="https://example.com"
+                target="_blank"
+                style="text-decoration: none; color: inherit"
+              >
+                <div class="software-card">
+                  <div class="card-header">
+                    <div class="software-info">
+                      <h3>Sample</h3>
+                      <div class="software-developer">Serato</div>
+                      <div class="software-version">2.0.0</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a
+                href="https://example.com"
+                target="_blank"
+                style="text-decoration: none; color: inherit"
+              >
+                <div class="software-card">
+                  <div class="card-header">
+                    <div class="software-info">
+                      <h3>MIDI Wizard</h3>
+                      <div class="software-developer">Unison</div>
+                      <div class="software-version">1.1.25</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </section>
+
+          <!-- KITs Section -->
+          <section class="section" data-category="kits">
+            <h2 class="section-title">KITs</h2>
+            <div class="software-grid">
+              <a
+                href="https://drive.google.com/file/d/11aynUSjUBjNwTXrKQfQ8-2g9Q3jiCJn2/view?usp=sharing"
+                target="_blank"
+                style="text-decoration: none; color: inherit"
+              >
+                <div class="software-card">
+                  <div class="card-header">
+                    <div class="software-info">
+                      <h3>ANALOG (HARDWARE) ONESHOTS </h3>
+                      <div class="software-developer">EXCLSUIVE BY KITS4LEAKS</div>
+                      <div class="software-version">2.9 GBs</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a
+                href="https://pixeldrain.com/u/zKNMFvv9"
+                target="_blank"
+                style="text-decoration: none; color: inherit"
+              >
+                <div class="software-card">
+                  <div class="card-header">
+                    <div class="software-info">
+                      <h3>Summrs intoxicated presets</h3>
+                      <div class="software-developer">Official Vocal Presets</div>
+                      <div class="software-version">$200</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a
+                href="https://www.dropbox.com/scl/fo/dw0o0ip966j03ca5v13u8/AAztbeeo2MSCScJ9pFLCZBs?rlkey=61dmtr614afqgiqend3z8yyf3&st=k2g5nkbj&dl=0"
+                target="_blank"
+                style="text-decoration: none; color: inherit"
+              >
+                <div class="software-card">
+                  <div class="card-header">
+                    <div class="software-info">
+                      <h3>tjriverss & conz.xo - 3D (deluxe)</h3>
+                      <!-- <div class="software-developer">Loopmasters</div>
+                      <div class="software-version">1.5.0</div> -->
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a
+                href="https://example.com"
+                target="_blank"
+                style="text-decoration: none; color: inherit"
+              >
+                <div class="software-card">
+                  <div class="card-header">
+                    <div class="software-info">
+                      <h3>Hip Hop Essentials</h3>
+                      <div class="software-developer">Producer Loops</div>
+                      <div class="software-version">2.0.3</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a
+                href="https://example.com"
+                target="_blank"
+                style="text-decoration: none; color: inherit"
+              >
+                <div class="software-card">
+                  <div class="card-header">
+                    <div class="software-info">
+                      <h3>EDM Kit Pack</h3>
+                      <div class="software-developer">Vengeance</div>
+                      <div class="software-version">4.1.2</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a
+                href="https://example.com"
+                target="_blank"
+                style="text-decoration: none; color: inherit"
+              >
+                <div class="software-card">
+                  <div class="card-header">
+                    <div class="software-info">
+                      <h3>Rock Drum Kits</h3>
+                      <div class="software-developer">Toontrack</div>
+                      <div class="software-version">1.8.5</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a
+                href="https://example.com"
+                target="_blank"
+                style="text-decoration: none; color: inherit"
+              >
+                <div class="software-card">
+                  <div class="card-header">
+                    <div class="software-info">
+                      <h3>Jazz Kit Collection</h3>
+                      <div class="software-developer">BFD</div>
+                      <div class="software-version">3.4.0</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <!-- Added JavaScript for sorting functionality -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const sortButtons = document.querySelectorAll(".sort-btn");
+        const sections = document.querySelectorAll(".section[data-category]");
+
+        sortButtons.forEach((button) => {
+          button.addEventListener("click", function () {
+            const filter = this.getAttribute("data-filter");
+
+            // Update active button
+            sortButtons.forEach((btn) => btn.classList.remove("active"));
+            this.classList.add("active");
+
+            // Filter sections
+            sections.forEach((section) => {
+              const category = section.getAttribute("data-category");
+
+              if (filter === "all" || filter === category) {
+                section.style.display = "block";
+              } else {
+                section.style.display = "none";
+              }
+            });
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
