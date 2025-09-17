@@ -194,7 +194,15 @@
         async function checkLink(link) {
           try {
             const proxyUrl = 'https://corsproxy.io/?';
-            const response = await fetch(proxyUrl + encodeURIComponent(link.href), { method: 'HEAD' });
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+            
+            const response = await fetch(proxyUrl + encodeURIComponent(link.href), { 
+              method: 'HEAD',
+              signal: controller.signal
+            });
+            
+            clearTimeout(timeoutId);
 
             if (response.ok) {
               const contentLength = response.headers.get('Content-Length');
@@ -204,7 +212,28 @@
               return { status: 'dead', size: 'N/A' };
             }
           } catch (err) {
-            return { status: 'dead', size: 'N/A' };
+            try {
+              const img = new Image();
+              return new Promise((resolve) => {
+                const timeout = setTimeout(() => {
+                  resolve({ status: 'dead', size: 'N/A' });
+                }, 5000);
+                
+                img.onload = () => {
+                  clearTimeout(timeout);
+                  resolve({ status: 'active', size: 'Unknown' });
+                };
+                
+                img.onerror = () => {
+                  clearTimeout(timeout);
+                  resolve({ status: 'dead', size: 'N/A' });
+                };
+                
+                img.src = link.href;
+              });
+            } catch (fallbackErr) {
+              return { status: 'dead', size: 'N/A' };
+            }
           }
         }
 
@@ -217,17 +246,19 @@
           statusSpan.style.display = 'block';
           statusSpan.style.marginTop = '8px';
           statusSpan.style.fontSize = '14px';
-          statusSpan.style.color = '#888';
+          statusSpan.style.color = '#94a3b8';
           statusSpan.textContent = 'Checking...';
           item.appendChild(statusSpan);
 
           const result = await checkLink(anchor);
 
           if (result.status === 'active') {
-            statusSpan.innerHTML = `✅ ACTIVE • ${result.size}`;
+            statusSpan.innerHTML = `✅ • ${result.size}`;
+            statusSpan.style.color = '#10b981'; // Green color for active
           } else {
             statusSpan.innerHTML = `N/A`;
-            statusSpan.style.color = '#e74c3c';
+            statusSpan.classList.add('dead');
+            statusSpan.style.color = '#e74c3c'; // Red color for dead
           }
         });
 
