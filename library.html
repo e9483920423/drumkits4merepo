@@ -228,12 +228,28 @@
         font-weight: 600;
         margin-bottom: 4px;
         width: 100%; /* Added full width for consistent centering */
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+        line-height: 1.2;
+        max-height: 2.4em; /* Limit to 2 lines */
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
       }
 
       .software-developer {
         font-size: 14px;
         color: #888888;
         width: 100%; /* Added full width for consistent centering */
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        line-height: 1.2;
+        max-height: 1.2em; /* Limit to 1 line */
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
 
       .software-version {
@@ -241,6 +257,13 @@
         color: #666666;
         margin-top: 8px;
         width: 100%; /* Added full width for consistent centering */
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        line-height: 1.2;
+        max-height: 1.2em; /* Limit to 1 line */
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
 
       /* Main software section - blue theme */
