@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KITS4LEAKS</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+        background-color: #0a0a0a;
+        color: #ffffff;
+        line-height: 1.4;
+      }
+
+      .container {
+        display: flex;
+        min-height: 100vh;
+      }
+
+      /* Sidebar */
+      /* Removed entire sidebar CSS section */
+
+      /* Home link styles */
+      .home-link {
+        text-decoration: none;
+      }
+
+      /* Updated sidebar-icon styles for header placement */
+      .sidebar-icon {
+        width: 40px;
+        height: 40px;
+        background-color: #1a1a1a;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background-color 0.2s;
+      }
+
+      .sidebar-icon:hover {
+        background-color: #2a2a2a;
+      }
+
+      .sidebar-icon.active {
+        background-color: #8b5cf6;
+      }
+
+      /* Main Content */
+      .main-content {
+        flex: 1;
+        /* Removed margin-left since sidebar is gone */
+        padding: 0;
+      }
+
+      /* Header */
+      .header {
+        background-color: #111111;
+        padding: 20px 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid #222222;
+      }
+
+      .logo-section {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .logo {
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(135deg, #8b5cf6, #ec4899);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 18px;
+      }
+
+      .title {
+        font-size: 24px;
+        font-weight: 600;
+      }
+
+      .library-text {
+        font-size: 14px;
+        color: #888888;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .search-section {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+      }
+
+      .controls {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .control-group {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 14px;
+        color: #888888;
+      }
+
+      .platform-switch {
+        background-color: #1a1a1a;
+        border: 1px solid #333333;
+        border-radius: 8px;
+        padding: 8px 16px;
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 14px;
+        transition: background-color 0.2s;
+      }
+
+      .platform-switch:hover {
+        background-color: #2a2a2a;
+      }
+
+      .sorting-buttons {
+        display: flex;
+        gap: 8px;
+        margin-left: 10px;
+      }
+
+      .sort-btn {
+        background-color: #1a1a1a;
+        border: 1px solid #333333;
+        border-radius: 6px;
+        padding: 6px 12px;
+        color: #888888;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        text-transform: uppercase;
+      }
+
+      .sort-btn:hover {
+        background-color: #2a2a2a;
+        color: #ffffff;
+      }
+
+      .sort-btn.active {
+        background-color: #8b5cf6;
+        border-color: #8b5cf6;
+        color: #ffffff;
+      }
+
+      /* Content Area */
+      .content {
+        padding: 40px;
+      }
+
+      .section {
+        margin-bottom: 60px;
+      }
+
+      .section-title {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 30px;
+        color: #ffffff;
+      }
+
+      .software-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 20px;
+      }
+
+      .software-card {
+        background-color: #111111;
+        border: 1px solid #222222;
+        border-radius: 12px;
+        padding: 14px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        height: 120px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .software-card:hover {
+        background-color: #1a1a1a;
+        border-color: #333333;
+        transform: translateY(-2px);
+      }
+
+      .card-header {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        flex: 1;
+      }
+
+      .software-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center; /* Added horizontal centering */
+        height: 100%;
+        text-align: center;
+        width: 100%; /* Added full width to ensure proper centering */
+      }
+
+        .software-info h3 {
+           font-size: 16px;
+           font-weight: 600;
+           margin-bottom: 4px;
+           width: 100%; /* Added full width for consistent centering */
+           word-wrap: break-word;
+           overflow-wrap: break-word;
+           hyphens: auto;
+           line-height: 1.2;
+           max-height: 2.4em; /* Limit to 2 lines */
+           overflow: hidden;
+           display: -webkit-box;
+           -webkit-line-clamp: 2;
+           -webkit-box-orient: vertical;
+           transition: max-height 0.5s ease-in-out; /* New: Enables smooth sliding transition */
+         }
+
+.software-info:hover h3 {
+  max-height: 20em; /* New: Large enough value to reveal full text (adjust if needed for very long content) */
+  -webkit-line-clamp: unset; /* New: Removes line clamping on hover */
+  overflow: visible; /* New: Ensures full text is shown without hiding */
+}
+      .software-developer {
+        font-size: 14px;
+        color: #888888;
+        width: 100%; /* Added full width for consistent centering */
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        line-height: 1.2;
+        max-height: 1.2em; /* Limit to 1 line */
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .software-version {
+        font-size: 12px;
+        color: #666666;
+        margin-top: 8px;
+        width: 100%; /* Added full width for consistent centering */
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        line-height: 1.2;
+        max-height: 1.2em; /* Limit to 1 line */
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      /* Main software section - blue theme */
+      .section:nth-child(1) .software-card h3 {
+        color: #60a5fa;
+      }
+
+      .section:nth-child(1) .software-card:hover {
+        box-shadow: 0 0 20px rgba(96, 165, 250, 0.3);
+        border-color: #60a5fa;
+      }
+
+      /* VSTs section - purple theme */
+      .section:nth-child(2) .software-card h3 {
+        color: #a855f7;
+      }
+
+      .section:nth-child(2) .software-card:hover {
+        box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+        border-color: #a855f7;
+      }
+
+      /* ARCHIVE section - green theme */
+      .section:nth-child(3) .software-card h3 {
+        color: #34d399;
+      }
+
+      .section:nth-child(3) .software-card:hover {
+        box-shadow: 0 0 20px rgba(52, 211, 153, 0.3);
+        border-color: #34d399;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        /* Removed sidebar responsive styles */
+
+        .header {
+          padding: 15px 20px;
+          flex-direction: column;
+          gap: 15px;
+        }
+
+        .search-section {
+          width: 100%;
+          justify-content: space-between;
+        }
+
+        .content {
+          padding: 20px;
+        }
+
+        .software-grid {
+          grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+          gap: 15px;
+        }
+
+        .sorting-buttons {
+          flex-wrap: wrap;
+          gap: 4px;
+        }
+
+        .sort-btn {
+          padding: 4px 8px;
+          font-size: 11px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .software-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .header {
+          padding: 10px 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Removed entire sidebar section -->
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <!-- Header -->
+        <header class="header">
+          <div class="logo-section">
+            <!-- Added sidebar-icon active to header -->
+            <a href="index.html" class="home-link">
+              <div class="sidebar-icon active">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-house"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"
+                  />
+                </svg>
+              </div>
+            </a>
+            <a href="/megathread" class="platform-switch">MEGATHREAD</a>
+            <div>
+              <div class="title">LIBRARY</div>
+              <div class="library-text">(K4L)</div>
+            </div>
+          </div>
+
+          <div class="search-section">
+            <div class="controls">
+              <div class="control-group">
+                <span>🔗</span>
+                <span><strong>>SORTING</strong></span>
+                <div class="sorting-buttons">
+                  <button class="sort-btn active" data-filter="all">ALL</button>
+                  <button class="sort-btn" data-filter="misc">MISC</button>
+                  <button class="sort-btn" data-filter="vsts">VSTS</button>
+                  <button class="sort-btn" data-filter="archive">ARCHIVE</button>
+                </div>
+              </div>
+
+
+          <div class="search-section">
+            <div class="controls">
+              <div class="control-group">
+                  <!--<span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg" viewBox="0 0 16 16">
+                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1 1 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4 4 0 0 1-.128-1.287z"/>
+                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287a12.2 12.2 0 0 0-3.658 0 8 8 0 0 0-.412-.833.05.05 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.04.04 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032q.003.022.021.037a13.3 13.3 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019q.463-.63.818-1.329a.05.05 0 0 0-.01-.059l-.018-.011a9 9 0 0 1-1.248-.595.05.05 0 0 1-.02-.066l.015-.019q.127-.095.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.05.05 0 0 0 .053.007q.121.1.248.195a.05.05 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.03.03 0 0 0-.02-.019m-8.198 7.307c-.789 0-1.438-.724-1.438-1.612s.637-1.613 1.438-1.613c.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612m5.316 0c-.788 0-1.438-.724-1.438-1.612s.637-1.613 1.438-1.613c.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612m-5.316 0c-.788 0-1.438-.724-1.438-1.612s.637-1.613 1.438-1.613c.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612"
+                  />
+                </svg> -->
+                <span>(BETA)</span>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <!-- Content -->
+        <div class="content">
+          <!-- Main Software Section -->
+          <section class="section" data-category="misc">
+            <h2 class="section-title">MISC</h2>
+            <div class="software-grid">
+
+              <a
+                href="https://b2.gangsloni.com/file/gangsloni/win/daw/Guitar_Pro.zip"
+                target="_blank"
+                style="text-decoration: none; color: inherit"
+              >
+                <div class="software-card">
+                  <div class="card-header">
+                    <div class="software-info">
+                      <h3>Guitar Pro</h3>
+                      <div class="software-developer">Arobas Music</div>
+                      <div class="software-version">8.0.2 Build 24 DAW</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+
+              <a
+                href="https://4bf8b07e0c97b9c92627fa4405f4975e.r2.cloudflarestorage.com/gangsloni/win/daw/Ableton_Live_v12.1.0.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=576e25e03507f251a11440fe6611ce55%2F20250917%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20250917T083232Z&X-Amz-Expires=60&X-Amz-SignedHeaders=host&X-Amz-Signature=e6c7ab30cbd3194e864e5ecdeab5ce9037c55b326ed153c958fc6244d92e5b4c"
+                target="_blank"
+                style="text-decoration: none; color: inherit"
+              >
+                <div class="software-card">
+                  <div class="card-header">
+                    <div class="software-info">
+                      <h3>Ableton Live</h3>
+                      <div class="software-developer">Ableton</div>
+                      <div class="software-version">12.1.0</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a
+                href="https://b2.gangsloni.com/file/gangsloni/win/daw/futuredj.zip"
+                target="_blank"
+                style="text-decoration: none; color: inherit"
+              >
+                <div class="software-card">
+                  <div class="card-header">
+                    <div class="software-info">
+                      <h3>future.dj pro</h3>
+                      <div class="software-developer">Xylio</div>
+                      <div class="software-version">1.10.0</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+
+              <a
+                href="https://b2.gangsloni.com/file/gangsloni/win/daw/Reason12.zip"
+                target="_blank"
+                style="text-decoration: none; color: inherit"
+              >
+                <div class="software-card">
+                  <div class="card-header">
+                    <div class="software-info">
+                      <h3>Reason</h3>
+                      <div class="software-developer">Reason Studios</div>
+                      <div class="software-version">12.2.5</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+
+            </div>
+          </section>
+
+          <!-- VSTs Section -->
+          <section class="section" data-category="vsts">
+            <h2 class="section-title">VSTs</h2>
+            <div class="software-grid">
+              <a
+                href="https://4bf8b07e0c97b9c92627fa4405f4975e.r2.cloudflarestorage.com/gangsloni/win/vst/Kontakt_v8.0.1.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=576e25e03507f251a11440fe6611ce55%2F20250917%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20250917T084459Z&X-Amz-Expires=60&X-Amz-SignedHeaders=host&X-Amz-Signature=439b0324f907d62f6daf8f54c26ed1f6b3a41e74005aa18cc15294f4768f4dab"
+                target="_blank"
+                style="text-decoration: none; color: inherit"
+              >
+                <div class="software-card">
+                  <div class="card-header">
+                    <div class="software-info">
+                      <h3>Kontakt</h3>
+                      <div class="software-developer">Native Instruments</div>
+                      <div class="software-version">v8.0.1 WIN</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+
+              <a
+                href="https://4bf8b07e0c97b9c92627fa4405f4975e.r2.cloudflarestorage.com/gangsloni/win/vst/TRITON_v1.3.3.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=576e25e03507f251a11440fe6611ce55%2F20250917%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20250917T090134Z&X-Amz-Expires=60&X-Amz-SignedHeaders=host&X-Amz-Signature=782c28be0f7151979ab2e2ae3095a848477b755d693c139363bec18ffd42a2d9"
+                target="_blank"
+                style="text-decoration: none; color: inherit"
+              >
+                <div class="software-card">
+                  <div class="card-header">
+                    <div class="software-info">
+                      <h3>Triton</h3>
+                      <div class="software-developer">KORG</div>
+                      <div class="software-version">1.3.3 WIN</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+
+              <a
+                href="https://b2.gangsloni.com/file/gangsloni/win/vst/Purity.zip"
+                target="_blank"
+                style="text-decoration: none; color: inherit"
+              >
+                <div class="software-card">
+                  <div class="card-header">
+                    <div class="software-info">
+                      <h3>Purity</h3>
+                      <div class="software-developer">Sonic Cat</div>
+                      <div class="software-version">1.2.5 WIN</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+
+              <a
+                href="https://4bf8b07e0c97b9c92627fa4405f4975e.r2.cloudflarestorage.com/gangsloni/win/vst/Zenology_v2.0.2.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=576e25e03507f251a11440fe6611ce55%2F20250917%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20250917T090032Z&X-Amz-Expires=60&X-Amz-SignedHeaders=host&X-Amz-Signature=33823e93dcd18c145c6b30966a19bf0e1c1eba2219e3f7cb657fed7dc277d1d2"
+                target="_blank"
+                style="text-decoration: none; color: inherit"
+              >
+                <div class="software-card">
+                  <div class="card-header">
+                    <div class="software-info">
+                      <h3>Zenology Pro</h3>
+                      <div class="software-developer">Roland</div>
+                      <div class="software-version">2.0.2 WIN</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+
+              <a
+                href="https://b2.gangsloni.com/file/gangsloni/win/vst/HalfTime.zip"
+                target="_blank"
+                style="text-decoration: none; color: inherit"
+              >
+                <div class="software-card">
+                  <div class="card-header">
+                    <div class="software-info">
+                      <h3>HalfTime</h3>
+                      <div class="software-developer">SoundToys</div>
+                      <div class="software-version">1.0.1 WIN</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+             <a
+                href="https://4bf8b07e0c97b9c92627fa4405f4975e.r2.cloudflarestorage.com/gangsloni/win/vst/Auto-Tune_Unlimited_v2023.12.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=576e25e03507f251a11440fe6611ce55%2F20250917%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20250917T085716Z&X-Amz-Expires=60&X-Amz-SignedHeaders=host&X-Amz-Signature=d759ace266939536b26cb065fef4020cec4f8b2cc8b95431cb06c892a8f93485"
+                target="_blank"
+                style="text-decoration: none; color: inherit"
+              >
+                <div class="software-card">
+                  <div class="card-header">
+                    <div class="software-info">
+                      <h3>AudoTune Unlimited</h3>
+                      <div class="software-developer">Antares</div>
+                      <div class="software-version">2023.12 WIN</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a
+                href="https://b2.gangsloni.com/file/gangsloni/win/vst/Portal.zip"
+                target="_blank"
+                style="text-decoration: none; color: inherit"
+              >
+                <div class="software-card">
+                  <div class="card-header">
+                    <div class="software-info">
+                      <h3>Portal</h3>
+                      <div class="software-developer">Output</div>
+                      <div class="software-version">1.0.1</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a
+                href="https://4bf8b07e0c97b9c92627fa4405f4975e.r2.cloudflarestorage.com/gangsloni/win/vst/Roland_v1.0.1.0.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=576e25e03507f251a11440fe6611ce55%2F20250917%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20250917T090250Z&X-Amz-Expires=60&X-Amz-SignedHeaders=host&X-Amz-Signature=544864460ad23be185157daadcdf25ff4d85adbd1eb41682fdfb33314b0481df"
+                target="_blank"
+                style="text-decoration: none; color: inherit"
+              >
+                <div class="software-card">
+                  <div class="card-header">
+                    <div class="software-info">
+                      <h3>Roland Bundle</h3>
+                      <div class="software-developer">Roland</div>
+                      <div class="software-version">1.0.1.0</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a
+                href="https://b2.gangsloni.com/file/gangsloni/win/vst/GR6Pro.zip"
+                target="_blank"
+                style="text-decoration: none; color: inherit"
+              >
+                <div class="software-card">
+                  <div class="card-header">
+                    <div class="software-info">
+                      <h3>Guitar Rig Pro 6</h3>
+                      <div class="software-developer">Native Instruments</div>
+                      <div class="software-version">6.2.2 WIN</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a
+                href="https://b2.gangsloni.com/file/gangsloni/win/vst/Addictive_Drums.zip"
+                target="_blank"
+                style="text-decoration: none; color: inherit"
+              >
+                <div class="software-card">
+                  <div class="card-header">
+                    <div class="software-info">
+                      <h3>Addictive Drums</h3>
+                      <div class="software-developer">XLN Audio</div>
+                      <div class="software-version">2.2.5.6 WIN</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a
+                href="https://b2.gangsloni.com/file/gangsloni/win/vst/Glitch2.zip"
+                target="_blank"
+                style="text-decoration: none; color: inherit"
+              >
+                <div class="software-card">
+                  <div class="card-header">
+                    <div class="software-info">
+                      <h3>Glitch 2</h3>
+                      <div class="software-developer">Illformed</div>
+                      <div class="software-version">2.1.0</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a
+                href="https://b2.gangsloni.com/file/gangsloni/win/vst/TAL-U-No-LX.zip"
+                target="_blank"
+                style="text-decoration: none; color: inherit"
+              >
+                <div class="software-card">
+                  <div class="card-header">
+                    <div class="software-info">
+                      <h3>TAL-U-No-LX</h3>
+                      <div class="software-developer">Togu Audio Line</div>
+                      <div class="software-version">4.5.4</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </section>
+
+          <!-- ARCHIVE Section -->
+          <section class="section" data-category="archive">
+            <h2 class="section-title">ARCHIVE</h2>
+            <div class="software-grid">
+              <a
+                href="https://drive.google.com/file/d/11aynUSjUBjNwTXrKQfQ8-2g9Q3jiCJn2/view?usp=sharing"
+                target="_blank"
+                style="text-decoration: none; color: inherit"
+              >
+                <div class="software-card">
+                  <div class="card-header">
+                    <div class="software-info">
+                      <h3>ANALOG (HARDWARE) ONESHOTS </h3>
+                      <div class="software-developer">EXCLSUIVE BY KITS4LEAKS</div>
+                      <div class="software-version">2.9 GBs</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a
+                href="https://pixeldrain.com/u/zKNMFvv9"
+                target="_blank"
+                style="text-decoration: none; color: inherit"
+              >
+                <div class="software-card">
+                  <div class="card-header">
+                    <div class="software-info">
+                      <h3>Summrs intoxicated presets</h3>
+                      <div class="software-developer">Official Vocal Presets</div>
+                      <div class="software-version">$200</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a
+                href="https://www.dropbox.com/scl/fo/dw0o0ip966j03ca5v13u8/AAztbeeo2MSCScJ9pFLCZBs?rlkey=61dmtr614afqgiqend3z8yyf3&st=k2g5nkbj&dl=0"
+                target="_blank"
+                style="text-decoration: none; color: inherit"
+              >
+                <div class="software-card">
+                  <div class="card-header">
+                    <div class="software-info">
+                      <h3>tjriverss & conz.xo - 3D (deluxe)</h3>
+                      <!-- <div class="software-developer">Loopmasters</div>
+                      <div class="software-version">1.5.0</div> -->
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a
+                href="https://drive.google.com/drive/folders/1mZdDdwZauWfAUTpZrxm6gADDIzX1F8ry"
+                target="_blank"
+                style="text-decoration: none; color: inherit"
+              >
+                <div class="software-card">
+                  <div class="card-header">
+                    <div class="software-info">
+                      <h3>PluggArchive</h3>
+                      <div class="software-developer">Drive Of Pluggnb/Plugg Drum kits</div>
+                      <div class="software-version">by (K4L)</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a
+                href="https://pixeldrain.com/u/XXZeNHdB"
+                target="_blank"
+                style="text-decoration: none; color: inherit"
+              >
+                <div class="software-card">
+                  <div class="card-header">
+                    <div class="software-info">
+                      <h3>Zenology Presets Collection</h3>
+                      <div class="software-developer">Presets</div>
+                      <!-- <div class="software-version">4.1.2</div> !-->
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a
+                href="https://mega.nz/file/yAFUgJbI#EZxLXM9K9MCmMaoXka3pqA9DjqqpUj23pCloSB7_Z4c"
+                target="_blank"
+                style="text-decoration: none; color: inherit"
+              >
+                <div class="software-card">
+                  <div class="card-header">
+                    <div class="software-info">
+                      <h3>POPULAR UNDERGROUND PROD DRUM KIT COMPILATION</h3>
+                      <!-- <div class="software-developer">Toontrack</div>
+                      <div class="software-version">1.8.5</div> !-->
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <!-- Added JavaScript for sorting functionality -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const sortButtons = document.querySelectorAll(".sort-btn");
+        const sections = document.querySelectorAll(".section[data-category]");
+
+        sortButtons.forEach((button) => {
+          button.addEventListener("click", function () {
+            const filter = this.getAttribute("data-filter");
+
+            // Update active button
+            sortButtons.forEach((btn) => btn.classList.remove("active"));
+            this.classList.add("active");
+
+            // Filter sections
+            sections.forEach((section) => {
+              const category = section.getAttribute("data-category");
+
+              if (filter === "all" || filter === category) {
+                section.style.display = "block";
+              } else {
+                section.style.display = "none";
+              }
+            });
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
