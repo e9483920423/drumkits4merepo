@@ -16,7 +16,7 @@
           Oxygen, Ubuntu, Cantarell, sans-serif;
         /* Fixed body overflow and scroll boundaries to prevent body element visibility */
         background: #0a0a0a;
-        color: #ffffff;
+        color: #60a5fa;
         line-height: 1.6;
         padding: 20px;
         overflow-x: hidden;
@@ -378,18 +378,18 @@
         height: 40px;
         margin: 0 10px;
         padding: 8px;
-        background-color: #1a1a1a;
-        border-radius: 50%;
+        background-color: rgba(47, 32, 83, 0);
+        border-radius: 100%;
         transition: all 0.3s ease;
         text-decoration: none;
-        border: 1px solid #333333;
+        border: 1px solid #33333300;
       }
 
       .discord-logo:hover,
       .telegram-logo:hover {
-        background-color: #2a2a2a;
+        background-color: rgba(43, 27, 81, 0.166);
         transform: scale(1.1);
-        box-shadow: 0 0 12px rgba(139, 92, 246, 0.3);
+        box-shadow: 0 0 12px rgba(138, 92, 246, 0.064);
       }
 
       .discord-logo svg,
@@ -574,27 +574,18 @@
           </div>
         </nav>
 
-        <nav class="news-section">
-          <!-- Made K4L NEWS the main header with twice the size and primary color -->
-          <h2 style="font-size: 32px; color: #824efd; margin-bottom: 12px"></h2>
-            NEWS
-          </h2>
-          <!-- Removed primary color from drumkits4.me link and made entire sentence cohesive -->
-          <p>
-            <strong
-              >LIBRARY IS NOW LIVE
-              <a
-                href="https://drumkits4.me/library"
-                style="
-                  font-weight: bold;
-                  color: #8b5cf6;
-                  text-decoration: underline;
-                "
-                >LIBRARY</a
-            > 
-          </p>
-        </nav>
-
+   <nav class="news-section">
+  <!-- Made NEWS the main header with twice the size and primary color -->
+  <h2 style="font-size: 30px; color: #824efd; margin-bottom: 10px;">LIBRARY IS NOW LIVE</h2>
+  <!-- Removed primary color from drumkits4.me link and made entire sentence cohesive -->
+  <p>
+    <!-- <strong>LIBRARY IS NOW LIVE</strong> !-->
+    <a
+      href="https://drumkits4.me/library"
+      style="font-weight: bold; color: #8b5cf6; text-decoration: underline;"
+    >LIBRARY</a>
+  </p>
+  </nav>
         <!-- Main section - collapsible format -->
         <main class="collapsible-section">
           <section class="section-header" onclick="toggleSection(this)">
