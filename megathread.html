@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KITS4LEAKS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, Cantarell, sans-serif;
+        /* Fixed body overflow and scroll boundaries to prevent body element visibility */
+        background: linear-gradient(
+          135deg,
+            #081c23 20%,
+            #081c24 40%,
+            #071a21 100%
+        );
+        color: #c5c5c5;
+        line-height: 1.6;
+        padding: 20px;
+        overflow-x: hidden;
+        overflow-y: auto;
+        height: 100vh;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+      }
+
+      /* Added html overflow control and scroll containment */
+      html {
+        overflow: hidden;
+        height: 100%;
+        scroll-behavior: smooth;
+      }
+
+      /* Added scrollable container to prevent body overflow */
+      .scroll-container {
+        height: 100vh;
+        overflow-y: auto;
+        overflow-x: hidden;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        contain: paint;
+        transform: translateZ(0);
+        overscroll-behavior: contain;
+      }
+
+      /* Optimized dynamic background with better performance settings */
+      .dynamic-bg {
+        position: fixed;
+        top: -10vh;
+        left: -10vw;
+        width: calc(100vw + 20vw);
+        height: calc(100vh + 20vh);
+        pointer-events: none;
+        z-index: -2;
+        will-change: transform;
+        contain: layout style paint;
+        transform: translate3d(0, 0, 0);
+      }
+
+      /* Reduced complexity and improved GPU acceleration for holographic layers */
+      .holographic-layer {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: conic-gradient(
+            from 0deg at 50% 50%,
+            rgba(4, 34, 63, 0.03) 0deg,
+            rgba(16, 24, 29, 0.05) 90deg,
+            rgba(16, 24, 29, 0.03) 180deg,
+            rgba(23, 23, 23, 0.03) 270deg,
+            rgba(4, 34, 63, 0.02) 360deg
+          ),
+          radial-gradient(
+            circle at 50% 50%,
+            rgba(11, 31, 51, 0.02) 0%,
+            transparent 15%
+          );
+        animation: freshHolographicFlow 30s ease-in-out infinite;
+        transform-origin: center;
+        filter: blur(8px) opacity(0.15);
+        transform: translate3d(0, 0, 0);
+        contain: layout style paint;
+        backface-visibility: hidden;
+        will-change: transform, filter;
+      }
+
+      .holographic-layer:nth-child(2) {
+        animation-delay: -10s;
+        animation-duration: 35s;
+        opacity: 0.08;
+        transform: rotate(45deg) translate3d(0, 0, 0);
+        filter: blur(10px) opacity(0.12);
+      }
+        */
+
+      .holographic-layer:nth-child(3) {
+        animation-delay: -20s;
+        animation-duration: 40s;
+        opacity: 0.04;
+        transform: rotate(-30deg) translate3d(0, 0, 0);
+        filter: blur(12px) opacity(0.1);
+      }*/
+
+      /* Simplified mesh pattern for better performance 
+      .holographic-mesh {
+        position: absolute;
+        width: 110%;
+        height: 110%;
+        top: -5%;
+        left: -5%;
+        background-image: repeating-linear-gradient(
+          0deg,
+          rgba(4, 34, 63, 0.004) 0px,
+          transparent 1px,
+          transparent 60px,
+          rgba(45, 72, 87, 0.004) 61px,
+          transparent 62px
+        );
+        animation: meshDrift 60s linear infinite;
+        opacity: 0.4;
+        transform: translate3d(0, 0, 0);
+        contain: layout style paint;
+        backface-visibility: hidden;
+        will-change: transform;
+      }*/
+
+      /* Holographic orb styling removed */
+
+      @keyframes freshHolographicFlow {
+        0%,
+        100% {
+          /* Constrained movement to prevent edge visibility */
+          transform: rotate(0deg) scale(1) translate3d(0%, 0%, 0);
+          filter: hue-rotate(0deg) blur(12px) opacity(0.3);
+        }
+        25% {
+          transform: rotate(0.1deg) scale(1.005) translate3d(-0.2%, 0.1%, 0);
+          filter: hue-rotate(15deg) blur(12px) opacity(0.4);
+        }
+        50% {
+          transform: rotate(-0.05deg) scale(0.998) translate3d(0.1%, -0.2%, 0);
+          filter: hue-rotate(-10deg) blur(11px) opacity(0.35);
+        }
+        75% {
+          transform: rotate(0.08deg) scale(1.002) translate3d(-0.1%, 0.15%, 0);
+          filter: hue-rotate(20deg) blur(11px) opacity(0.45);
+        }
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        /* Container background elements color #253b46 or #002436 */
+        background-color: #002436;
+        padding: 40px;
+        border-radius: 8px;
+        box-shadow: 0 2px 22px rgba(254, 88, 0, 0.04);
+        position: relative;
+        z-index: 1;
+      }
+
+      /* Add containing blocks for better paint performance */
+      .container {
+        contain: content;
+        transform: translateZ(0);
+      }
+
+      h1 {
+        /* Made main title significantly larger and more prominent */
+        font-size: 30px;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 15px;
+        /* Restored text color to original orange #FE5800 */
+        color: #fe5800;
+        text-shadow: 0 0 10px rgba(254, 88, 0, 0.3);
+      }
+
+      /* Added specific styling for the main title to make it most prominent */
+      .main-title {
+        font-size: 32px;
+        font-weight: 900;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      /* Smaller subtitle styling for compact header */
+      .subtitle {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 20px;
+      }
+
+      /* Compact community section styling */
+      .community-section {
+        text-align: center;
+        margin: 25px 0;
+      }
+
+      .community-section h2 {
+        font-size: 16px;
+        margin-bottom: 8px;
+        /* Restored community section header color to original orange */
+        color: #fe5800;
+      }
+
+      .community-section p {
+        font-size: 14px;
+        margin: 5px 0;
+      }
+
+      /* Compact news section styling */
+      .news-section {
+        text-align: center;
+        margin: 20px 0;
+        padding: 15px;
+        background-color: rgba(254, 88, 0, 0.1);
+        border-radius: 8px;
+        border: 1px solid rgba(254, 88, 0, 0.3);
+      }
+
+      .news-section h2 {
+        font-size: 14px;
+        margin-bottom: 8px;
+        /* Restored K4L NEWS header color to original orange */
+        color: #fe5800;
+      }
+
+      .news-section p {
+        font-size: 13px;
+        line-height: 1.4;
+      }
+
+      .description {
+        margin: 15px 0;
+        /* Restored description color to original orange */
+        color: #fe5800;
+        font-size: 14px;
+        line-height: 1.5;
+      }
+
+      .description a {
+        /* Restored description link color to original orange */
+        color: #fe5800;
+        text-shadow: 0 0 8px rgba(254, 88, 0, 0.2);
+      }
+
+      .description a:hover {
+        /* Restored description link hover color to original orange */
+        color: #fe5800;
+        text-shadow: 0 0 8px rgba(254, 88, 0, 0.2);
+      }
+
+      .emoji {
+        margin-right: 8px;
+        text-shadow: 0 0 8px rgba(254, 88, 0, 0.4);
+      }
+
+      .highlighted-link {
+        font-weight: bold;
+        /* Restored highlighted link color to original orange */
+        color: #fe5800 !important;
+        text-decoration: underline;
+      }
+
+      .section-divider {
+        /* Restored border color to original orange */
+        border-top: 1px solid #fe5800;
+        margin: 40px 0 20px 0;
+        padding-top: 20px;
+      }
+
+      /* Added collapsible section styling */
+      .collapsible-section {
+        margin: 20px 0;
+        border: 1px solid rgba(254, 88, 0, 0.1);
+        border-radius: 8px;
+        overflow: hidden;
+        background-color: rgba(51, 80, 96, 0.3);
+      }
+
+      .section-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 15px 20px;
+        cursor: pointer;
+        background-color: rgba(254, 88, 0, 0.1);
+        transition: all 0.3s ease;
+        user-select: none;
+      }
+
+      .section-header:hover {
+        background-color: rgba(254, 88, 0, 0.3);
+        /* Restored hover text shadow to original orange */
+        text-shadow: 0 0 8px rgba(254, 88, 0, 0.2);
+        box-shadow: 0 0 12px rgba(254, 88, 0, 0.2);
+      }
+
+      .section-header h2 {
+        margin: 0;
+        /* Restored section header color to original orange */
+        color: #fe5800;
+        font-size: 16px;
+      }
+
+      .collapse-icon {
+        width: 20px;
+        height: 20px;
+        transition: transform 0.3s ease;
+        /* Restored collapse icon color to original orange */
+        fill: #fe5800;
+      }
+
+      .collapse-icon.rotated {
+        transform: rotate(180deg);
+      }
+
+      .section-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+        padding: 0 20px;
+        contain: layout style paint;
+      }
+
+      .section-content.expanded {
+        max-height: 2000px;
+        padding: 20px;
+      }
+
+      .section-content .links-section {
+        margin: 15px 0;
+      }
+
+      .section-content .description {
+        margin: 15px 0;
+        /* Restored section content description color to original orange */
+        color: #fe5800;
+        font-size: 14px;
+        line-height: 1.5;
+      }
+
+      .warning-box {
+        /* Updated warning box styling */
+        background-color: rgba(254, 88, 0, 0.1);
+        border: 1px solid rgba(254, 88, 0, 1);
+        border-radius: 6px;
+        padding: 15px;
+        margin: 20px 0;
+        text-align: center;
+        box-shadow: 0 0 12px rgba(254, 88, 0, 0.2);
+      }
+
+      .warning-box h3 {
+        /* Restored warning heading color to original orange */
+        color: #fe5800;
+        margin-bottom: 16px;
+      }
+
+      /* Center all text in the container */
+      .container {
+        text-align: center;
+      }
+
+      .discord-logo,
+      .telegram-logo {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        margin: 0 10px;
+        padding: 8px;
+        background-color: rgba(254, 88, 0, 0.1);
+        border-radius: 50%;
+        transition: all 0.3s ease;
+        text-decoration: none;
+      }
+
+      .discord-logo:hover,
+      .telegram-logo:hover {
+        background-color: rgba(254, 88, 0, 0.4);
+        transform: scale(1.1);
+        box-shadow: 0 0 12px rgba(254, 88, 0, 0.6);
+      }
+
+      .discord-logo svg,
+      .telegram-logo svg {
+        width: 25px;
+        height: 25px;
+        fill: #5865f2;
+      }
+
+      .telegram-logo svg {
+        fill: #0088cc;
+      }
+
+      /* Restored original link colors to orange */
+      a {
+        color: #fe5800;
+        text-decoration: none;
+        display: block;
+        margin: 8px 0;
+        padding: 4px 8px;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+      }
+      .emoji.spin {
+        display: inline-block;
+        animation: spin 2s linear infinite;
+        backface-visibility: hidden; /* smooth rotation */
+      }
+
+      a:hover {
+        background-color: rgba(254, 88, 0, 0.2);
+        color: #fe5800;
+        box-shadow: 0 0 12px rgba(254, 88, 0, 0.6);
+      }
+
+      /* Restored consistent spacing for section content */
+      .section-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease-out, padding 0.3s ease;
+        padding: 0 20px;
+      }
+
+      .section-content.expanded {
+        max-height: 2000px;
+        padding: 20px;
+      }
+
+      .section-content .links-section {
+        margin: 15px 0;
+      }
+
+      .section-content .description {
+        margin: 15px 0;
+        /* Restored section content description color to original orange */
+        color: #fe5800;
+        font-size: 14px;
+        line-height: 1.5;
+      }
+
+      /* Added footer section styling for restored links */
+      .footer-section {
+        margin-top: 40px;
+        padding-top: 20px;
+        border-top: 1px solid rgba(6, 73, 137, 0.3);
+        text-align: center;
+        font-size: 12px;
+        color: #888;
+      }
+
+      .footer-links {
+        margin: 10px 0;
+      }
+
+      .footer-links a {
+        display: inline;
+        margin: 0 5px;
+        /* Restored footer link color to original orange */
+        color: #fe5800;
+        font-size: 12px;
+      }
+
+      .copyright {
+          position: absolute;
+          bottom: 10px;
+          left: 10px;
+          color: #808080;
+          opacity: 0.7;
+          font-size: 12px;
+          z-index: 1000;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+      }
+      
+      .github-link {
+          position: absolute;
+          bottom: 10px;
+          right: 10px;
+          display: inline-flex;
+          align-items: center;
+          margin: 0;
+          padding: 8px;
+          opacity: 0.7;
+          transition: all 0.3s ease;
+          background: rgba(254, 88, 0, 0.1);
+          border-radius: 4px;
+      }
+
+      .github-link:hover {
+          opacity: 1;
+          background: rgba(254, 88, 0, 0.2);
+          box-shadow: 0 0 12px rgba(254, 88, 0, 0.4);
+      }
+
+      .logo-link {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        display: block;
+        padding: 6px;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+        background-color: rgba(254, 88, 0, 0.1);
+      }
+
+      .logo-link:hover {
+        background-color: rgba(254, 88, 0, 0.2);
+        transform: scale(1.1);
+        box-shadow: 0 0 12px rgba(254, 88, 0, 0.4);
+      }
+
+      .site-logo {
+        display: block;
+        filter: drop-shadow(0 0 8px rgba(254, 88, 0, 0.3));
+      }
+    </style>
+
+  </head>
+      </body>
+      <!-- Updated dynamic background with holographic layers -->
+      <div class="dynamic-bg" id="dynamicBg">
+        <div class="holographic-layer"></div>
+        <div class="holographic-layer"></div>
+        <div class="holographic-layer"></div>
+        <div class="holographic-mesh"></div>
+      </div>
+
+      <header class="container">
+        <a href="index.html" class="logo-link" title="Back to Home">
+          <svg width="25" height="25" viewBox="0 0 24 24" class="site-logo">
+            <path 
+              d="M12 2L1 12h3v9h6v-6h4v6h6v-9h3L12 2zM12 4.4l6 5.4v7.2h-2v-6H8v6H6v-7.2l6-5.4z"
+              fill="#fe5800"
+              stroke="#fe5800"
+              stroke-width="0.5"
+            />
+          </svg>
+        </a>
+        <h1 class="main-title"><strong>(KITS4LEAKS)</strong>MEGATHREAD</h1>
+        <h1 class="subtitle">
+          <em
+            >(COLLECTION OF FREE STUFF ON THE INTERNET! MUSIC CREATION
+            RESOURCES, VFX + GFX, TOOLS + MORE)</em
+          >
+        </h1>
+
+        <nav class="community-section">
+          <!-- Discord logo linking to discord.gg/kits4leaks -->
+          <div class="social-links">
+            <a href="https://discord.gg/kits4leaks" class="discord-logo">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-discord" viewBox="0 0 16 16">
+              <path d="M13.545 2.907a13.2 13.2 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.2 12.2 0 0 0-3.658 0 8 8 0 0 0-.412-.833.05.05 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.04.04 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032q.003.022.021.037a13.3 13.3 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019q.463-.63.818-1.329a.05.05 0 0 0-.01-.059l-.018-.011a9 9 0 0 1-1.248-.595.05.05 0 0 1-.02-.066l.015-.019q.127-.095.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.05.05 0 0 1 .053.007q.121.1.248.195a.05.05 0 0 1-.004.085 8 8 0 0 1-1.249.594.05.05 0 0 0-.03.03.05.05 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.2 13.2 0 0 0 4.001-2.02.05.05 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.03.03 0 0 0-.02-.019m-8.198 7.307c-.789 0-1.438-.724-1.438-1.612s.637-1.613 1.438-1.613c.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612m5.316 0c-.788 0-1.438-.724-1.438-1.612s.637-1.613 1.438-1.613c.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612"/>
+                </svg>
+            </a>
+            <a href="https://t.me/+FDbUFVvalN1hZTcx" class="telegram-logo">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telegram" viewBox="0 0 16 16">
+            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.287 5.906q-1.168.486-4.666 2.01-.567.225-.595.442c-.03.243.275.339.69.47l.175.055c.408.133.958.288 1.243.294q.39.01.868-.32 3.269-2.206 3.374-2.23c.05-.012.12-.026.166.016s.042.12.037.141c-.03.129-1.227 1.241-1.846 1.817-.193.18-.33.307-.358.336a8 8 0 0 1-.188.186c-.38.366-.664.64.015 1.088.327.216.589.393.85.571.284.194.568.387.936.629q.14.092.27.187c.331.236.63.448.997.414.214-.02.435-.22.547-.82.265-1.417.786-4.486.906-5.751a1.4 1.4 0 0 0-.013-.315.34.34 0 0 0-.114-.217.53.53 0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09"/>
+                </svg>
+            </a>
+          </div>
+        </nav>
+
+        <nav class="news-section">
+          <!-- Made K4L NEWS the main header with twice the size and primary color -->
+          <h2 style="font-size: 32px; color: #fe5800; margin-bottom: 12px">
+            NEWS
+          </h2>
+          <!-- Removed primary color from drumkits4.me link and made entire sentence cohesive -->
+          <p>
+            <strong
+              >OUR NEW PLUGGNB KIT ARCHIVE IS HOSTED @
+              <a
+                href="https://drive.google.com/drive/folders/1mZdDdwZauWfAUTpZrxm6gADDIzX1F8ry"
+                style="
+                  font-weight: bold;
+                  color: #fe5800;
+                  text-decoration: underline;
+                "
+                >pluggarchive</a
+              >NEW DISCORD CHANNEL "THE COOK-UP ARCHIVAL" IS NOW PUBLIC TO
+              <em>PREMIUM MEMBERS & SERVER BOOSTERS</em></strong
+            >
+          </p>
+        </nav>
+
+        <!-- Main section - collapsible format -->
+        <main class="collapsible-section">
+          <section class="section-header" onclick="toggleSection(this)">
+            <h2>CRACK & PLUGIN SITES</h2>
+            <svg class="collapse-icon" viewBox="0 0 24 24">
+              <path d="M7 10l5 5 5-5z" />
+            </svg>
+          </section>
+          <section class="section-content">
+            <div class="description">
+              <a href="https://www.google.com/">https://www.google.com</a>
+              <a href="https://yandex.com/"><span class="emoji">📀</span>https://yandex.com</a>
+              <p style="color: #c5c5c5; font-size: 12px">
+                <strong
+                  >Lets get this out of the way first, literally just Google
+                  plugin name torrent. Obviously you'll have to be a bit careful
+                  with where you're downloading from. Lots of sites try to just
+                  throw single exe files at you and pass it off as an installer.
+                  Other than that, if you use common sense Google can be a
+                  pretty good resource.</strong
+                >
+              </p>
+            </div>
+
+            <div class="links-section">
+              <a href="https://rutracker.org/"><span class="emoji">📀</span>https://rutracker.org</a>
+              <a href="http://audioz.download.com/"><span class="emoji">📀</span>http://audioz.download.com</a>
+              <a href="https://g-meh.com/"><span class="emoji">📀</span>https://g-meh.com</a>
+              <a href="https://www.magesy.blog">https://www.magesy.blog</a>
+              <a href="https://www.4download.net/">https://www.4download.net</a>
+              <a href="https://audiosex.pro/">https://audiosex.pro</a>
+              <a href="https://audionews.org/">https://audionews.org</a>
+              <a href="https://audiotools.in">https://audiotools.in</a>
+              <a href="https://vsttorrentz.net/">https://vsttorrentz.net</a>
+              <a href="https://codec.kyiv.ua/Audi0.htm">https://codec.kyiv.ua/Audi0.htm</a>
+              <a href="https://plugincrack.com">https://plugincrack.com</a>
+              <a href="https://cracksurl.com">https://cracksurl.com</a>
+              <a href="https://plugintorrent.com">https://plugintorrent.com</a>
+              <a href="https://www.kvraudio.com/">https://www.kvraudio.com</a>
+            </div>
+            <div class="links-section">
+              <a href="https://bobdule999.wixsite.com/librarytools"
+                >https://bobdule999.wixsite.com/librarytools</a
+              >
+            </div>
+            <div class="links-section">
+              <a href="https://w16.monkrus.ws">https://w16.monkrus.ws</a>
+            </div>
+          </section>
+        </main>
+
+        <section class="collapsible-section">
+          <div class="section-header" onclick="toggleSection(this)">
+            <h2>KITS</h2>
+            <svg class="collapse-icon" viewBox="0 0 24 24">
+              <path d="M7 10l5 5 5-5z" />
+            </svg>
+          </div>
+          <section class="section-content">
+            <div class="links-section">
+              <a
+                href="https://discord.gg/kits4leaks"
+                style="
+                  color: #fe5800;
+                  text-shadow: 0 0 5px #fe3500;
+                  text-decoration: none;
+                  font-family: 'Roboto', sans-serif;
+                  font-weight: bold;
+                  padding: 5px 10px;
+                  background-color: #2f3136;
+                  border-radius: 5px;
+                  transition: all 0.3s ease;
+                "
+                ><span
+                  class="emoji"
+                  style="
+                    display: inline-block;
+                    animation: spin 2s linear infinite;
+                  "
+                  >📀</span
+                >JOIN KITS4LEAKS DISCORD</a
+              >
+              <style>
+                a:hover {
+                  color: #ff3500;
+                  transform: scale(1.05);
+                }
+                @keyframes spin {
+                  0% {
+                    transform: rotate(0deg);
+                  }
+                  100% {
+                    transform: rotate(360deg);
+                  }
+                }
+              </style>
+              <a href="https://kits4beats.com"><span class="emoji">📀</span>https://kits4beats.com</a>
+              <a href="http://audioz.download.com/"><span class="emoji">📀</span>http://audioz.download.com</a>
+              <a href="https://t.me/pluggsupplyhub"> <span class="emoji">📀</span>https://t.me/pluggsupplyhub</a>
+              <a href="https://www.reddit.com/r/Drumkits/">https://www.reddit.com/r/Drumkits</a>
+              <a href="https://t.me/prodkit">https://t.me/prodkit</a>
+              <a href="https://t.me/dripcartel">https://t.me/dripcartel</a>
+              <a href="https://t.me/trilogystuff">https://t.me/trilogystuff</a>
+              <a href="https://t.me/ProducersGB">https://t.me/ProducersGB</a>
+              <a href="https://t.me/producers_gang">https://t.me/producers_gang</a>
+              <a href="https://t.me/oxeoncertified">https://t.me/oxeoncertified</a>
+              <a href="https://t.me/bust_samples">https://t.me/bust_samples</a>
+              <a href="https://t.me/kits4beats">https://t.me/kits4beats</a>
+              <a href="https://t.me/sampleloops">https://t.me/sampleloops</a>
+              <a href="https://t.me/PlugDrums">https://t.me/PlugDrums</a>
+              <a href="https://t.me/bxrdrums">https://t.me/bxrdrums</a>
+              <a href="https://t.me/drumkitsfree">https://t.me/drumkitsfree</a>
+              <a href="https://t.me/prodgang">https://t.me/prodgang</a>
+              <a href="https://t.me/prodglobal">https://t.me/prodglobal</a>
+            </div>
+          </section>
+        </section>
+
+        <!--
+            <section class="collapsible-section">
+                <div class="section-header" onclick="toggleSection(this)">
+                    <h2>OTHER TELEGRAMS</h2>
+                    <svg class="collapse-icon" viewBox="0 0 24 24">
+                        <path d="M7 10l5 5 5-5z"/>
+                    </svg>
+                </div>
+                <section class="section-content">
+                    <section class="links-section">
+                        <a href="https://cs.rin.ru"><span class="emoji">📀</span>https://cs.rin.ru</a>
+                        <a href="https://online-fix.me/"><span class="emoji">📀</span>https://online-fix.me/</a>
+                        <a href="https://steamrip.com/">https://steamrip.com/</a>
+                        <a href="http://www.ovagames.com/">http://www.ovagames.com/</a>
+                        <a href="https://g4u.to/">https://g4u.to/</a>
+                        <a href="https://gamesdrive.net/">https://gamesdrive.net/</a>
+                        <a href="https://catalogue.smods.ru/">https://catalogue.smods.ru/</a>
+                        <a href="https://ankergames.net/">https://ankergames.net/</a>
+                        <a href="https://fitgirl-repacks.site/">https://fitgirl-repacks.site/</a>
+                    </section>
+                </section>
+            </section>
+            -->
+
+        <section class="collapsible-section">
+          <header class="section-header" onclick="toggleSection(this)">
+            <h2>AUDIO TOOLS</h2>
+            <svg class="collapse-icon" viewBox="0 0 24 24">
+              <path d="M7 10l5 5 5-5z" />
+            </svg>
+          </header>
+          <section class="section-content">
+            <section class="links-section">
+              <a href="https://github.com/yt-dlp/yt-dlp"
+                >https://github.com/yt-dlp/yt-dlp</a
+              >
+              <a href="https://github.com/ErrorFlynn/ytdlp-interface">https://github.com/ErrorFlynn/ytdlp-interface</a>
+              <a href="https://www.slsknet.org/news/">https://www.slsknet.org/news</a>
+              <a href="https://downloadmusicschool.com/bandcamp/">https://downloadmusicschool.com/bandcamp</a>
+              <a href="https://lucida.to">https://lucida.to</a>
+              <a href="https://vgmdb.net">https://vgmdb.net</a>
+              <a href="https://www.beatconnect.com/"
+                >https://www.beatconnect.com</a
+              >
+              <a href="https://github.com/Rafiuth/Soggfy"
+                >https://github.com/Rafiuth/Soggfy</a
+              >
+              <a href="https://github.com/justin025/onthespot"
+                >https://github.com/justin025/onthespot</a
+              >
+              <a href="https://cobalt.tools">https://cobalt.tools</a>
+              <a href="https://doubledouble.top">https://doubledouble.top</a>
+              <a href="https://musicdex.org">https://musicdex.org</a>
+              <a href="https://sanet.st/music/">https://sanet.st/music</a>
+              <a href="https://www.squidify.org">https://www.squidify.org</a>
+              <a href="https://github.com/nathom/streamrip">https://github.com/nathom/streamrip</a>
+              <a href="https://squid.wtf">https://squid.wtf</a>
+            </section>
+          </section>
+        </section>
+
+        <section class="collapsible-section">
+          <header class="section-header" onclick="toggleSection(this)">
+            <h2>STREAMING APP/SITES</h2>
+            <svg class="collapse-icon" viewBox="0 0 24 24">
+              <path d="M7 10l5 5 5-5z" />
+            </svg>
+          </header>
+          <section class="section-content">
+            <section class="links-section">
+              <a href="https://github.com/mrpond/BlockTheSpot"
+                >https://github.com/mrpond/BlockTheSpot</a
+              >
+              <a href="https://th-ch.github.io/youtube-music/"
+                >https://th-ch.github.io/youtube-music</a
+              >
+              <a href="https://spotube.krtirtho.dev"
+                >https://spotube.krtirtho.dev</a
+              >
+              <a
+                href="https://en.wikipedia.org/wiki/Comparison_of_music_streaming_services"
+                >https://en.wikipedia.org/wiki/Comparison_of_music_streaming_services</a
+              >
+              <a href="https://reddit.musicplayer.io">https://reddit.musicplayer.io</a>
+              <a href="https://github.com/OuterTune/OuterTune"
+                >https://github.com/OuterTune/OuterTune</a
+              >
+              <a href="https://revanced.app/">https://revanced.app</a>
+              <a href="https://slsknet.org/">https://slsknet.org</a>
+              <a href="https://lucida.to/">https://lucida.to</a>
+              <a href="https://spicetify.app/">https://spicetify.app</a>
+              <a href="https://github.com/SpotX-Official/SpotX"
+                >https://github.com/SpotX-Official/SpotX</a
+              >
+            </section>
+          </section>
+        </section>
+
+        <div class="collapsible-section">
+          <header class="section-header" onclick="toggleSection(this)">
+            <h2>DISCOVER MUSIC</h2>
+            <svg class="collapse-icon" viewBox="0 0 24 24">
+              <path d="M7 10l5 5 5-5z" />
+            </svg>
+          </header>
+          <section class="section-content">
+            <div class="links-section">
+              <a href="https://rateyourmusic.com"><span class="emoji">📀</span>https://rateyourmusic.com</a>
+              <a href="https://soundcloud.com/"><span class="emoji">📀</span>https://soundcloud.com</a>
+              <a href="https://www.last.fm/">https://www.last.fm</a>
+            </div>
+          </section>
+        </div>
+
+        <div class="collapsible-section">
+          <div class="section-header" onclick="toggleSection(this)">
+            <h2>FILE HOSTING SITES</h2>
+            <svg class="collapse-icon" viewBox="0 0 24 24">
+              <path d="M7 10l5 5 5-5z" />
+            </svg>
+          </div>
+          <section class="section-content">
+            <div class="links-section">
+              <a href="https://pixeldrain.com/"><span class="emoji">📀</span>https://pixeldrain.com</a>
+              <a href="https://dd.buzzheavier.com/">https://dd.buzzheavier.com</a>
+              <a href="https://gofile.io/">https://gofile.io</a>
+            </div>
+          </section>
+        </div>
+
+        <div class="collapsible-section">
+          <header class="section-header" onclick="toggleSection(this)">
+            <h2>CONCERTS/LIVE SHOWS</h2>
+            <svg class="collapse-icon" viewBox="0 0 24 24">
+              <path d="M7 10l5 5 5-5z" />
+            </svg>
+          </header>
+          <div class="section-content">
+            <div class="links-section">
+              <a href="https://hate5six.com">https://hate5six.com</a>
+              <a href="https://365.ilysm.nl">https://365.ilysm.nl</a>
+              <a href="https://youtube.com">https://youtube.com</a>
+              <a href="https://www.jambase.com/videos">https://www.jambase.com/videos</a>
+              <a href="https://bt.etree.org/">https://bt.etree.org</a>
+              <a href="http://www.dimeadozen.org/">http://www.dimeadozen.org</a>
+              <a href="http://zombtracker.the-zomb.com/">http://zombtracker.the-zomb.com</a>
+              <a href="https://www.guitars101.com/">https://www.guitars101.com</a>
+              <a href="https://www.shnflac.net/">https://www.shnflac.net</a>
+              <a href="https://www.musebootlegs.com/">https://www.musebootlegs.com</a>
+              <a href="https://livebootlegconcert.blogspot.com/">https://livebootlegconcert.blogspot.com</a>
+              <a href="https://topdjmixes.com/">https://topdjmixes.com</a>
+              <a href="https://mixing.dj/">https://mixing.dj</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="collapsible-section">
+          <div class="section-header" onclick="toggleSection(this)">
+            <h2>RADIO</h2>
+            <svg class="collapse-icon" viewBox="0 0 24 24">
+              <path d="M7 10l5 5 5-5z" />
+            </svg>
+          </div>
+          <div class="section-content">
+            <div class="links-section">
+              <a href="https://somafm.com/">https://somafm.com</a>
+              <a href="https://github.com/deroverda/recommended-radio-streams">https://github.com/deroverda/recommended-radio-streams</a>
+              <a href="https://en.wikipedia.org/wiki/List_of_Internet_radio_stations">https://en.wikipedia.org/wiki/List_of_Internet_radio_stations</a>
+              <a href="https://fmstream.org/">https://fmstream.org</a>
+              <a href="https://drivenlisten.com/">https://drivenlisten.com</a>
+              <a href="https://radio.garden/">https://radio.garden</a>
+              <a href="https://github.com/get-iplayer/get_iplayer">https://github.com/get-iplayer/get_iplayer</a>
+              <a href="https://www.bbc.co.uk/sounds">https://www.bbc.co.uk/sounds</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="collapsible-section">
+          <div class="section-header" onclick="toggleSection(this)">
+            <h2>VFX/GFX</h2>
+            <svg class="collapse-icon" viewBox="0 0 24 24">
+              <path d="M7 10l5 5 5-5z" />
+            </svg>
+          </div>
+          <div class="section-content">
+            <div class="links-section">
+              <a href="https://freepreset.net">https://freepreset.net</a>
+              <a href="https://freevideoeffect.com">https://freevideoeffect.com</a>
+              <a href="https://vk.com/the_gfx">https://vk.com/the_gfx</a>
+              <a href="https://aedownload.com">https://aedownload.com</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="collapsible-section">
+          <div class="section-header" onclick="toggleSection(this)">
+            <h2>OTHER PIRACY, NICHE GUIDES/THREADS</h2>
+            <svg class="collapse-icon" viewBox="0 0 24 24">
+              <path d="M7 10l5 5 5-5z" />
+            </svg>
+          </div>
+          <div class="section-content">
+            <div class="links-section">
+              <a href="https://ori5000.github.io/musicripping.html">https://ori5000.github.io/musicripping.html</a>
+              <a href="https://fmhy.net">https://fmhy.net</a>
+              <a href="https://ripped.guide">https://ripped.guide</a>
+              <a href="https://github.com/jnv/lists">https://github.com/jnv/lists</a>
+              <a href="https://everythingmoe.com">https://everythingmoe.com</a>
+              <a href="https://cs.rin.ru/forum/viewtopic.php?f=10&t=95461">https://cs.rin.ru/forum/viewtopic.php?f=10&t=95461</a>
+              <a href="https://rentry.org/firehawk52">https://rentry.org/firehawk52</a>
+              <a href="https://github.com/topics/awesome-list">https://github.com/topics/awesome-list</a>
+              <a href="https://theindex.moe">https://theindex.moe</a>
+              <a href="https://r-roms.github.io">https://r-roms.github.io</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="collapsible-section">
+          <div class="section-header" onclick="toggleSection(this)">
+            <h2>STREAMING</h2>
+            <svg class="collapse-icon" viewBox="0 0 24 24">
+              <path d="M7 10l5 5 5-5z" />
+            </svg>
+          </div>
+          <section class="section-content">
+            <div class="links-section">
+              <a href="https://hdrezka.website">https://hdrezka.website</a>
+              <a href="https://veloratv.ru">https://veloratv.ru</a>
+              <a href="https://watch.spencerdevs.xyz">https://watch.spencerdevs.xyz</a>
+              <a href="https://fmoviesto.cc/watch-tv">https://fmoviesto.cc/watch-tv</a>
+              <a href="https://xprime.tv">https://xprime.tv</a>
+              <a href="https://www.vidbinge.com">https://www.vidbinge.com</a>
+              <a href="https://www.nepu.to">https://www.nepu.to</a>
+              <a href="https://alienflix.net">https://alienflix.net</a>
+              <a href="https://www.cineby.app">https://www.cineby.app</a>
+              <a href="https://www.fmovies.gd">https://www.fmovies.gd</a>
+              <a href="https://cinemaos.live">https://cinemaos.live</a>
+              <a href="https://freetvz.com">https://freetvz.com</a>
+              <a href="https://ytch.tv">https://ytch.tv</a>
+              <a href="https://cytu.be">https://cytu.be</a>
+              <a href="https://www.toonamiaftermath.com">https://www.toonamiaftermath.com</a>
+            </div>
+          </section>
+        </div>
+
+        <section class="collapsible-section">
+          <header class="section-header" onclick="toggleSection(this)">
+            <h2>GAMING</h2>
+            <svg class="collapse-icon" viewBox="0 0 24 24">
+              <path d="M7 10l5 5 5-5z" />
+            </svg>
+          </header>
+          <section class="section-content">
+            <section class="links-section">
+              <a href="https://cs.rin.ru"><span class="emoji">📀</span>https://cs.rin.ru</a>
+              <a href="https://online-fix.me"><span class="emoji">📀</span>https://online-fix.me</a>
+              <a href="https://steamrip.com">https://steamrip.com</a>
+              <a href="http://www.ovagames.com">http://www.ovagames.com</a>
+              <a href="https://g4u.to">https://g4u.to</a>
+              <a href="https://gamesdrive.net">https://gamesdrive.net</a>
+              <a href="https://catalogue.smods.ru">https://catalogue.smods.ru</a>
+              <a href="https://ankergames.net/">https://ankergames.net</a>
+              <a href="https://fitgirl-repacks.site">https://fitgirl-repacks.site</a>
+              <a href="https://hisgames.org">https://hisgames.org</a>
+            </section>
+          </section>
+        </section>
+
+        <div class="collapsible-section">
+          <div class="section-header" onclick="toggleSection(this)">
+            <h2>
+              COMMUNITY (SUBMIT SITES FOR THIS SECTION IN OUR DISCORD SERVER)
+            </h2>
+            <svg class="collapse-icon" viewBox="0 0 24 24">
+              <path d="M7 10l5 5 5-5z" />
+            </svg>
+          </div>
+          <div class="section-content">
+            <div class="links-section">
+              <a href="https://www.reddit.com/r/xTrill/">https://www.reddit.com/r/xTrill</a>
+              <a href="https://www.myabandonware.com/">https://www.myabandonware.com</a>
+              <a href="https://https://www.gimp.org/">https://https://www.gimp.org</a>
+              <a href="https://opendirsearch.abifog.com">https://opendirsearch.abifog.com</a>
+              <a href="https://onehack.us">https://onehack.us</a>
+              <a href="https://sounds.spriters-resource.com">https://sounds.spriters-resource.com</a>
+              <a href="https://en.btdig.com/index.htm/">https://en.btdig.com/index.htm</a>
+              <a href="https://ultimatevocalremover.com/">https://ultimatevocalremover.com</a>
+              <a href="https://bitmidi.com">https://bitmidi.com</a>
+              <a href="https://docs.google.com/spreadsheets/d/1dp0enfrqLMM7LHFsGbnXjicerR2EZ_-MOw0KSJpbdx8/edit?gid=1475529600#gid=1475529600">The Sample Goldmine</a>
+              <a href="https://aesthetics.fandom.com/wiki/Aesthetics_Wiki">Aesthetics wiki</a>
+              <a href="https://samples.kb6.de/downloads.php">https://samples.kb6.de/downloads.php</a>
+              <a href="https://new-team.org/">https://new-team.org</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="warning-box">
+          <h3>PROMOTION</h3>
+          <p><strong>Our subbreddit is now public!</strong></p>
+          <p><a href="https://www.reddit.com/r/kits4reddit/">KITS4REDDIT</a></p>
+          <p><strong>Want to promo something of yours here?! Join our discord & DM admin @83924723904712</strong></p>
+        </div>
+                <div class="copyright">
+          © kits4leaks 2025
+        </div>
+        <a href="https://github.com/e9483920423/drumkits4merepo/blob/dc1311535b5cf051a4fc3057f1258c93b54e5d3f/KITS4LEAKS%20MEGATHREAD.md#kits4leaks-megathread" class="github-link" title="GitHub Repository">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="#fe5800" class="bi bi-github" viewBox="0 0 16 16">
+              <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/>
+            </svg>
+        </a>
+
+          <script 
+           async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6678845590132995"
+           crossorigin="anonymous">
+          </script>
+
+        <script type="text/javascript" data-cfasync="false">
+      /*<![CDATA[/* */
+      (function(){var h=window,g="e2efe61f601b0f6aa486a17f24572058",p=[["siteId",403-893-419+10+5237548],["minBid",0],["popundersPerIP","0"],["delayBetween",0],["default",false],["defaultPerDay",0],["topmostLayer","auto"]],l=["d3d3LmludGVsbGlwb3B1cC5jb20vWWRFL2xnOS5qcw==","ZDNtcjd5MTU0ZDJxZzUuY2xvdWRmcm9udC5uZXQvai93YUlzYk4veHNiLWFkbWluLTIubWluLmNzcw=="],m=-1,v,s,j=function(){clearTimeout(s);m++;if(l[m]&&!(1783969248000<(new Date).getTime()&&1<m)){v=h.document.createElement("script");v.type="text/javascript";v.async=!0;var u=h.document.getElementsByTagName("script")[0];v.src="https://"+atob(l[m]);v.crossOrigin="anonymous";v.onerror=j;v.onload=function(){clearTimeout(s);h[g.slice(0,16)+g.slice(0,16)]||j()};s=setTimeout(j,5E3);u.parentNode.insertBefore(v,u)}};if(!h[g]){try{Object.freeze(h[g]=p)}catch(e){}j()}})();
+      /*]]>/* */
+        </script>
+
+
+      </header>
+      </body>
+    <!-- Particle system with holographic background script -->
+    <script>
+      function toggleSection(header) {
+        const content = header.nextElementSibling;
+        const icon = header.querySelector(".collapse-icon");
+
+        if (content.classList.contains("expanded")) {
+          content.classList.remove("expanded");
+          icon.classList.remove("rotated");
+        } else {
+          content.classList.add("expanded");
+          icon.classList.add("rotated");
+          // Add new tab functionality only to section content links
+          const sectionLinks = content.getElementsByTagName('a');
+          for(let link of sectionLinks) {
+            link.setAttribute('target', '_blank');
+            link.setAttribute('rel', 'noopener noreferrer');
+          }
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        // All sections will start collapsed by default
+      });
+
+      const dynamicBg = document.getElementById("dynamicBg");
+
+      let animationFrameId = null;
+      let pendingMouseUpdate = false;
+
+      // Replace current mousemove implementation with throttled version
+      let ticking = false;
+      document.addEventListener("mousemove", (e) => {
+          if (!ticking) {
+              window.requestAnimationFrame(() => {
+                  updateLayerPositions(e);
+                  ticking = false;
+              });
+              ticking = true;
+          }
+      });
+
+      // Cache DOM selections
+      const layers = document.querySelectorAll(".holographic-layer");
+      const mesh = document.querySelector(".holographic-mesh");
+
+      function updateLayerPositions(e) {
+          const mouseX = e.clientX / window.innerWidth;
+          const mouseY = e.clientY / window.innerHeight;
+          
+          // Use transform3d for GPU acceleration
+          layers.forEach((layer, index) => {
+              const intensity = (index + 1) * 0.01;
+              layer.style.transform = 
+                  `translate3d(${mouseX * intensity}px, ${mouseY * intensity}px, 0)`;
+          });
+      }
+
+      let colorUpdateTime = 0;
+      function updateHolographicColors() {
+        colorUpdateTime += 0.016; // ~60fps
+        
+        if (colorUpdateTime % 0.1 < 0.016) { // Update every 6 frames for better performance
+          const time = colorUpdateTime * 0.5;
+          const layers = document.querySelectorAll(".holographic-layer");
+
+          layers.forEach((layer, index) => {
+            const hueShift = Math.sin(time + index * 0.3) * 15;
+            const brightness = 0.95 + Math.sin(time * 0.2 + index) * 0.05;
+            layer.style.filter = `hue-rotate(${hueShift}deg) brightness(${brightness})`;
+          });
+        }
+          
+
+        requestAnimationFrame(updateHolographicColors);
+      }
+
+      updateHolographicColors();
+
+      // Resize handler for orbs removed
+    </script>
+  </body>
+</html>
