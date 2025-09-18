@@ -13,6 +13,11 @@
       "source": "/megathread.html",
       "destination": "/megathread",
       "permanent": true
+    },
+    {
+      "source": "/library.html",
+      "destination": "/library",
+      "permanent": true
     }
   ],
   "rewrites": [
@@ -21,11 +26,15 @@
       "destination": "/megathread.html"
     },
     {
+      "source": "/library",
+      "destination": "/library.html"
+    },
+    {
       "source": "/",
       "destination": "/index.html"
     },
     {
-      "source": "/((?!megathread).*)",
+      "source": "/((?!megathread|library).*)",
       "destination": "/index.html"
     }
   ]
