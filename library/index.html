@@ -270,11 +270,16 @@
       function performExternalSearch() {
         const searchInput = document.getElementById('externalSearchInput').value;
         const site = document.getElementById('siteSelector').value;
-        const searchMap = {
-          'audioz': 'https://audioz.download/',
-          'kits4beats': 'https://kits4beats.com/'
-        };
-        const searchUrl = `https://duckduckgo.com/?q=${encodeURIComponent(searchInput + ' site:' + searchMap[site])}`;
+        
+        let searchUrl;
+        if (site === 'kits4beats') {
+          // Direct search on kits4beats
+          searchUrl = `https://kits4beats.com/?s=${encodeURIComponent(searchInput)}`;
+        } else {
+          // DuckDuckGo search for audioz
+          searchUrl = `https://duckduckgo.com/?q=${encodeURIComponent(searchInput + ' site:audioz.download')}`;
+        }
+        
         window.open(searchUrl, '_blank');
       }
 
