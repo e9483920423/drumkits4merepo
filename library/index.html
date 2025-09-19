@@ -273,8 +273,9 @@
         
         let searchUrl;
         if (site === 'kits4beats') {
-          // Direct search on kits4beats
-          searchUrl = `https://kits4beats.com/?s=${encodeURIComponent(searchInput)}`;
+          // Direct search on kits4beats with proper space formatting
+          const formattedSearch = searchInput.replace(/\s+/g, '+');
+          searchUrl = `https://kits4beats.com/?s=${formattedSearch}`;
         } else {
           // DuckDuckGo search for audioz
           searchUrl = `https://duckduckgo.com/?q=${encodeURIComponent(searchInput + ' site:audioz.download')}`;
@@ -383,17 +384,6 @@
           });
         });
       });
-
-      function performExternalSearch() {
-        const searchInput = document.getElementById('externalSearchInput').value;
-        const site = document.getElementById('siteSelector').value;
-        const searchMap = {
-          'audioz': 'https://audioz.download/',
-          'kits4beats': 'https://kits4beats.com/'
-        };
-        const searchUrl = `https://duckduckgo.com/?q=${encodeURIComponent(searchInput + ' site:' + searchMap[site])}`;
-        window.open(searchUrl, '_blank');
-      }
     </script>
   </body>
 </html>
