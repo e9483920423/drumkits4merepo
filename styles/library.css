@@ -2,8 +2,8 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 24px;
-  margin-bottom: 40px;
+  gap: 16px;
+  margin-bottom: 24px;
 }
 
 .header-container h1 {
@@ -142,14 +142,106 @@
   border-color: #34d399;
 }
 
+/* External Search Footer Styles */
+.external-search-footer {
+  margin-top: 60px;
+  margin-bottom: 40px;
+  padding: 30px;
+  background-color: #111111;
+  border: 1px solid #475569;
+  border-radius: 8px;
+}
+
+.external-search-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.external-search-header {
+  color: #06b6d4;
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.external-search-box {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+#externalSearchInput {
+  flex: 1;
+  background-color: #1a1a1a;
+  color: #e2e8f0;
+  font-size: 16px;
+  padding: 12px 16px;
+  border: 2px solid #475569;
+  border-radius: 4px;
+  outline: none;
+  font-family: "Ramabhadra", sans-serif;
+}
+
+#externalSearchInput:focus {
+  border-color: #a855f7;
+}
+
+#siteSelector {
+  background-color: #1a1a1a;
+  color: #e2e8f0;
+  padding: 0 16px;
+  border: 2px solid #475569;
+  border-radius: 4px;
+  font-family: "Ramabhadra", sans-serif;
+  cursor: pointer;
+}
+
+#siteSelector:focus {
+  border-color: #a855f7;
+}
+
+#siteSelector option {
+  background-color: #1a1a1a;
+  color: #e2e8f0;
+  padding: 8px;
+}
+
+.search-button {
+  background-color: #a855f7;
+  color: #0f172a;
+  font-weight: bold;
+  padding: 0 24px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: "Ramabhadra", sans-serif;
+  transition: all 0.2s;
+}
+
+.search-button:hover {
+  background-color: #9333ea;
+  transform: translateY(-1px);
+}
+
 @media (max-width: 768px) {
   .header-container {
     flex-direction: column;
     align-items: stretch;
+    gap: 8px;
+    margin-bottom: 12px;
   }
 
   .item-list {
     grid-template-columns: 1fr;
     min-width: 100%;
+    margin-top: 12px;
+  }
+
+  .external-search-box {
+    flex-direction: column;
+  }
+
+  #siteSelector {
+    padding: 12px 16px;
   }
 }

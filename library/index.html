@@ -250,9 +250,34 @@
           </a>
         </div>
       </div>
+
+      <div class="external-search-footer">
+        <div class="external-search-container">
+          <h2 class="external-search-header">SEARCH EXTERNAL SITES</h2>
+          <div class="external-search-box">
+            <input type="text" id="externalSearchInput" placeholder="SEARCH EXTERNAL SITES..." />
+            <select id="siteSelector">
+              <option value="audioz">AUDIOZ</option>
+              <option value="kits4beats">KITS4BEATS</option>
+            </select>
+            <button class="search-button" onclick="performExternalSearch()">SEARCH</button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script>
+      function performExternalSearch() {
+        const searchInput = document.getElementById('externalSearchInput').value;
+        const site = document.getElementById('siteSelector').value;
+        const searchMap = {
+          'audioz': 'https://audioz.download/',
+          'kits4beats': 'https://kits4beats.com/'
+        };
+        const searchUrl = `https://duckduckgo.com/?q=${encodeURIComponent(searchInput + ' site:' + searchMap[site])}`;
+        window.open(searchUrl, '_blank');
+      }
+
       document.addEventListener("DOMContentLoaded", function () {
         const searchInput = document.getElementById("searchInput");
         const lists = document.querySelectorAll(".item-list");
@@ -353,6 +378,17 @@
           });
         });
       });
+
+      function performExternalSearch() {
+        const searchInput = document.getElementById('externalSearchInput').value;
+        const site = document.getElementById('siteSelector').value;
+        const searchMap = {
+          'audioz': 'https://audioz.download/',
+          'kits4beats': 'https://kits4beats.com/'
+        };
+        const searchUrl = `https://duckduckgo.com/?q=${encodeURIComponent(searchInput + ' site:' + searchMap[site])}`;
+        window.open(searchUrl, '_blank');
+      }
     </script>
   </body>
 </html>

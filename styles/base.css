@@ -81,6 +81,7 @@ body {
   border-radius: 4px;
   transition: all 0.2s;
   font-family: "Ramabhadra", sans-serif;
+  margin-bottom: 8px;
 }
 
 .sidebar-nav a:hover {
@@ -128,6 +129,7 @@ body {
   align-items: center;
   gap: 8px;
   padding: 10px 14px;
+  margin-bottom: 12px;
   /* Updated footer link background to #1a1a1a */
   background-color: #1a1a1a;
   /* Updated footer link text to white */
@@ -136,6 +138,10 @@ body {
   border-radius: 4px;
   transition: all 0.2s;
   font-family: "Ramabhadra", sans-serif;
+}
+
+.sidebar-footer a:last-child {
+  margin-bottom: 0;
 }
 
 .sidebar-footer a:hover {
@@ -193,13 +199,38 @@ a {
     height: auto;
     position: relative;
     border-right: none;
-    /* Updated mobile border color to slate */
     border-bottom: 1px solid #475569;
     padding: 20px 16px;
+    overflow: visible;
+  }
+
+  .sidebar-footer {
+    position: relative;
+    bottom: auto;
+    width: 100%;
+    margin-top: 30px;
   }
 
   .main-content {
     margin-left: 0;
     padding: 20px 16px;
+    width: 100%;
+  }
+
+  .external-search-box {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .external-search-box input,
+  .external-search-box select,
+  .external-search-box button {
+    width: 100%;
+    margin: 0;
+  }
+
+  #siteSelector,
+  .search-button {
+    height: 45px;
   }
 }

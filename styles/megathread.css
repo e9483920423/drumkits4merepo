@@ -25,11 +25,16 @@
   background-color: #222;
 }
 
+.collapsible-header:hover h2 {
+  text-shadow: 0 0 10px #a855f7;
+}
+
 .collapsible-header h2 {
   margin: 0;
   border: none;
   display: inline;
   font-size: 22px;
+  color: #a855f7;
 }
 
 .collapsible-header::after {
@@ -126,7 +131,7 @@ h2::before {
 }
 
 .link-item a {
-  color: #e2e8f0;
+  color: #a855f7;
   display: block;
   width: 100%;
 }
@@ -147,7 +152,7 @@ h2::before {
 
 .footer-content p {
   margin: 8px 0;
-  color: #e2e8f0;
+  color: #06b6d4;
 }
 
 .footer-link {
