@@ -3,7 +3,7 @@
 // @namespace http://tampermonkey.net/
 // @version 1.4.9.19
 // @description Opens any download link on kits4beats kit pages.
-// @author 83924723904712
+// @author .gg/kits4leaks
 // @match https://kits4beats.com/*
 // @icon https://www.google.com/s2/favicons?sz=64&domain=kits4beats.com
 // @grant none
