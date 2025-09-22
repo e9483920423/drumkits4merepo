@@ -49,11 +49,8 @@
     <div class="main-content">
       <div class="header-container">
         <h1>LIBRARY</h1>
-        <!-- Added new search box structure with nested container -->
         <div class="search-container">
-          <div class="search-box">
-            <input type="text" id="searchInput" placeholder="SEARCH ITEMS..." />
-          </div>
+          <input type="text" id="searchInput" placeholder="SEARCH ITEMS..." />
         </div>
       </div>
 
@@ -280,144 +277,123 @@
     </div>
 
     <script>
-        function performExternalSearch() {
-          const searchInput = document.getElementById('externalSearchInput').value;
-          const site = document.getElementById('siteSelector').value;
-          
-          let searchUrl;
-          if (site === 'kits4beats') {
-            // Direct search on kits4beats with proper space formatting
-            const formattedSearch = searchInput.replace(/\s+/g, '+');
-            searchUrl = `https://kits4beats.com/?s=${formattedSearch}`;
-          } else {
-            // DuckDuckGo search for audioz
-            searchUrl = `https://duckduckgo.com/?q=${encodeURIComponent(searchInput + ' site:audioz.download')}`;
-          }
-          
-          window.open(searchUrl, '_blank');
+      function performExternalSearch() {
+        const searchInput = document.getElementById('externalSearchInput').value;
+        const site = document.getElementById('siteSelector').value;
+        
+        let searchUrl;
+        if (site === 'kits4beats') {
+          // Direct search on kits4beats with proper space formatting
+          const formattedSearch = searchInput.replace(/\s+/g, '+');
+          searchUrl = `https://kits4beats.com/?s=${formattedSearch}`;
+        } else {
+          // DuckDuckGo search for audioz
+          searchUrl = `https://duckduckgo.com/?q=${encodeURIComponent(searchInput + ' site:audioz.download')}`;
+        }
+        
+        window.open(searchUrl, '_blank');
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const searchInput = document.getElementById("searchInput");
+        const lists = document.querySelectorAll(".item-list");
+        const items = document.querySelectorAll(".item-list div");
+
+        function formatBytes(bytes) {
+          if (bytes === 0) return '0 B';
+          const k = 1024;
+          const sizes = ['B', 'KB', 'MB', 'GB'];
+          const i = Math.floor(Math.log(bytes) / Math.log(k));
+          return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
         }
 
-        document.addEventListener("DOMContentLoaded", function () {
-          const searchInput = document.getElementById("searchInput");
-          const sections = document.querySelectorAll("h2");
-          const lists = document.querySelectorAll(".item-list");
-          const items = document.querySelectorAll(".item-list div");
+        async function checkLink(link) {
+          try {
+            const proxyUrl = 'https://corsproxy.io/?';
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+            
+            const response = await fetch(proxyUrl + encodeURIComponent(link.href), { 
+              method: 'HEAD',
+              signal: controller.signal
+            });
+            
+            clearTimeout(timeoutId);
 
-          function formatBytes(bytes) {
-            if (bytes === 0) return '0 B';
-            const k = 1024;
-            const sizes = ['B', 'KB', 'MB', 'GB'];
-            const i = Math.floor(Math.log(bytes) / Math.log(k));
-            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-          }
-
-          async function checkLink(link) {
-            try {
-              const proxyUrl = 'https://corsproxy.io/?';
-              const controller = new AbortController();
-              const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
-              
-              const response = await fetch(proxyUrl + encodeURIComponent(link.href), { 
-                method: 'HEAD',
-                signal: controller.signal
-              });
-              
-              clearTimeout(timeoutId);
-
-              if (response.ok) {
-                const contentLength = response.headers.get('Content-Length');
-                const size = contentLength ? formatBytes(parseInt(contentLength, 10)) : 'Unknown';
-                return { status: 'active', size };
-              } else {
-                return { status: 'dead', size: 'N/A' };
-              }
-            } catch (err) {
-              try {
-                const img = new Image();
-                return new Promise((resolve) => {
-                  const timeout = setTimeout(() => {
-                    resolve({ status: 'dead', size: 'N/A' });
-                  }, 5000);
-                  
-                  img.onload = () => {
-                    clearTimeout(timeout);
-                    resolve({ status: 'active', size: 'Unknown' });
-                  };
-                  
-                  img.onerror = () => {
-                    clearTimeout(timeout);
-                    resolve({ status: 'dead', size: 'N/A' });
-                  };
-                  
-                  img.src = link.href;
-                });
-              } catch (fallbackErr) {
-                return { status: 'dead', size: 'N/A' };
-              }
-            }
-          }
-
-          items.forEach(async (item) => {
-            const anchor = item.querySelector('a');
-            const url = anchor.href;
-
-            const statusSpan = document.createElement('span');
-            statusSpan.className = 'status-indicator';
-            statusSpan.style.display = 'block';
-            statusSpan.style.marginTop = '8px';
-            statusSpan.style.fontSize = '14px';
-            statusSpan.style.color = '#94a3b8';
-            statusSpan.textContent = 'Checking...';
-            item.appendChild(statusSpan);
-
-            const result = await checkLink(anchor);
-
-            if (result.status === 'active') {
-              statusSpan.innerHTML = `N/A - ✅ - • ${result.size}`;
-              statusSpan.style.color = '#10b981'; // Green color for active
+            if (response.ok) {
+              const contentLength = response.headers.get('Content-Length');
+              const size = contentLength ? formatBytes(parseInt(contentLength, 10)) : 'Unknown';
+              return { status: 'active', size };
             } else {
-              statusSpan.innerHTML = `N/A - ❌ - • Unknown`;
-              statusSpan.classList.add('dead');
-              statusSpan.style.color = '#e74c3c'; // Red color for dead
+              return { status: 'dead', size: 'N/A' };
             }
-          });
+          } catch (err) {
+            try {
+              const img = new Image();
+              return new Promise((resolve) => {
+                const timeout = setTimeout(() => {
+                  resolve({ status: 'dead', size: 'N/A' });
+                }, 5000);
+                
+                img.onload = () => {
+                  clearTimeout(timeout);
+                  resolve({ status: 'active', size: 'Unknown' });
+                };
+                
+                img.onerror = () => {
+                  clearTimeout(timeout);
+                  resolve({ status: 'dead', size: 'N/A' });
+                };
+                
+                img.src = link.href;
+              });
+            } catch (fallbackErr) {
+              return { status: 'dead', size: 'N/A' };
+            }
+          }
+        }
 
-          searchInput.addEventListener("input", function () {
-            const query = searchInput.value.toLowerCase();
+        items.forEach(async (item) => {
+          const anchor = item.querySelector('a');
+          const url = anchor.href;
 
-            sections.forEach((section, index) => {
-              const sectionText = section.textContent.toLowerCase();
-              const targetSections = ['misc', 'vsts', 'archive'];
+          const statusSpan = document.createElement('span');
+          statusSpan.className = 'status-indicator';
+          statusSpan.style.display = 'block';
+          statusSpan.style.marginTop = '8px';
+          statusSpan.style.fontSize = '14px';
+          statusSpan.style.color = '#94a3b8';
+          statusSpan.textContent = 'Checking...';
+          item.appendChild(statusSpan);
 
-              if (targetSections.includes(sectionText)) {
-                const correspondingList = lists[index];
-                if (correspondingList) {
-                  const items = correspondingList.querySelectorAll("div");
-                  let hasVisibleItems = false;
+          const result = await checkLink(anchor);
 
-                  items.forEach(item => {
-                    const text = item.textContent.toLowerCase();
-                    if (text.includes(query)) {
-                      item.style.display = "block";
-                      hasVisibleItems = true;
-                    } else {
-                      item.style.display = "none";
-                    }
-                  });
+          if (result.status === 'active') {
+            statusSpan.innerHTML = `✅ • ${result.size}`;
+            statusSpan.style.color = '#10b981'; // Green color for active
+          } else {
+            statusSpan.innerHTML = `N/A`;
+            statusSpan.classList.add('dead');
+            statusSpan.style.color = '#e74c3c'; // Red color for dead
+          }
+        });
 
-                  // Show/hide the H2 section based on whether it has visible items
-                  if (query === '' || hasVisibleItems) {
-                    section.style.display = "block";
-                    correspondingList.style.display = "block";
-                  } else {
-                    section.style.display = "none";
-                    correspondingList.style.display = "none";
-                  }
-                }
+        searchInput.addEventListener("input", function () {
+          const query = searchInput.value.toLowerCase();
+
+          lists.forEach(list => {
+            const items = list.querySelectorAll("div");
+            items.forEach(item => {
+              const text = item.textContent.toLowerCase();
+              if (text.includes(query)) {
+                item.style.display = "block";
+              } else {
+                item.style.display = "none";
               }
             });
           });
         });
-      </script>
+      });
+    </script>
   </body>
 </html>
