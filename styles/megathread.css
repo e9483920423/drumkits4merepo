@@ -26,7 +26,7 @@
 }
 
 .collapsible-header:hover h2 {
-  text-shadow: 0 0 10px #a855f7;
+  text-shadow: 0 0 10px #eb6123;
 }
 
 .collapsible-header h2 {
@@ -34,7 +34,7 @@
   border: none;
   display: inline;
   font-size: 22px;
-  color: #a855f7;
+  color: #eb6123;
 }
 
 .collapsible-header::after {
@@ -131,7 +131,7 @@ h2::before {
 }
 
 .link-item a {
-  color: #a855f7;
+  color: #eb6123;
   display: block;
   width: 100%;
 }
@@ -152,22 +152,22 @@ h2::before {
 
 .footer-content p {
   margin: 8px 0;
-  color: #a855f7;
+  color: #eb6123;
 }
 
 .footer-link {
   display: inline-block;
-  color: #a855f7;
+  color: #eb6123;
   font-weight: bold;
   padding: 8px 16px;
   margin: 8px 0;
-  border: 1px solid #a855f7;
+  border: 1px solid #eb6123;
   border-radius: 4px;
   transition: all 0.2s;
 }
 
 .footer-link:hover {
-  background-color: #a855f7;
+  background-color: #eb6123;
   color: #000;
   box-shadow: 0 0 10px rgba(168, 85, 247, 0.3);
 }

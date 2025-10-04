@@ -42,10 +42,10 @@ body {
   font-size: 28px;
   margin-bottom: 40px;
   /* Updated title color to cyan */
-  color: #a855f7;
+  color: #eb6123;
   letter-spacing: -1px;
   /* Updated border color to cyan */
-  border-bottom: 3px solid #a855f7;
+  border-bottom: 3px solid #eb6123;
   padding-bottom: 6px;
   font-family: "Ramabhadra", sans-serif;
 }
@@ -88,12 +88,12 @@ body {
   /* Updated hover background to #1a1a1a */
   background-color: #1a1a1a;
   /* Updated hover color from orange to purple */
-  color: #a855f7;
+  color: #eb6123;
 }
 
 .sidebar-nav a.active {
   /* Updated active background from orange to purple */
-  background-color: #a855f7;
+  background-color: #eb6123;
   /* Updated active text color to dark slate */
   color: #0f172a;
   font-weight: 400;
@@ -146,7 +146,7 @@ body {
 
 .sidebar-footer a:hover {
   /* Updated footer link hover to brighter purple */
-  background-color: #8b5cf6;
+  background-color: #eb6123;
   transform: translateX(4px);
 }
 
