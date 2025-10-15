@@ -143,9 +143,14 @@ h2::before {
 }
 
 .promotion-footer {
-  background-color: #111111;
+  margin-top: 60px;
+  margin-bottom: 40px;
+  padding: 30px;
+  background-color: rgba(17, 17, 17, 0.3);
   border-top: 1px solid #444;
-  margin-top: 40px;
+  backdrop-filter: blur(15px);
+  border: 1px solid #eb6123;
+  border-radius: 8px;
   padding: 20px;
   text-align: center;
 }
@@ -165,6 +170,7 @@ h2::before {
   color: #eb6123;
   font-weight: bold;
   padding: 8px 16px;
+  border: 2px solid #eb6123;
   margin: 8px 0;
   border: 1px solid #eb6123;
   border-radius: 4px;
