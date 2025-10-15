@@ -4,7 +4,6 @@
   padding: 0;
 }
 
-/* Added Ramabhadra font class and updated body font-family */
 .ramabhadra-regular {
   font-family: "Ramabhadra", sans-serif;
   font-weight: 400;
@@ -12,10 +11,12 @@
 }
 
 body {
-  /* Updated background color from black to very dark black */
-  background-color: #0a0a0a;
-  /* Updated text color to light blue-gray */
-  color: #e2e8f0;
+  background-image: url('bg/bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: #eb6123;
   font-family: "Ramabhadra", sans-serif;
   font-weight: 400;
   line-height: 1.6;
@@ -27,42 +28,42 @@ body {
 
 .sidebar {
   width: 280px;
-  /* Updated sidebar background to #111111 */
-  background-color: #111111;
-  /* Updated border color to slate */
-  border-right: 1px solid #eb6123;
-  padding: 32px 20px;
+  /* Updated sidebar to glassmorphism with flexbox layout */
+  background-color: rgba(17, 17, 17, 0.1);
+  backdrop-filter: blur(10px);
+  border-right: 1px solid rgba(235, 97, 35, 0.3);
   position: fixed;
   height: 100vh;
-  overflow-y: auto;
   z-index: 100;
+  display: flex;
+  flex-direction: column;
 }
 
 .sidebar h1 {
   font-size: 28px;
   margin-bottom: 40px;
-  /* Updated title color to cyan */
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 32px;
   color: #943d15;
   letter-spacing: -1px;
-  /* Updated border color to cyan */
   border-bottom: 3px solid #eb6123;
   padding-bottom: 6px;
   font-family: "Ramabhadra", sans-serif;
 }
 
 .sidebar-nav {
-  margin-bottom: 40px;
+  flex: 1;
+  padding: 0 20px;
 }
 
 .sidebar-nav h3 {
-  /* Updated section header color to slate */
-  color: #943d15;
+  color: #eb6123;
   font-size: 16px;
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-bottom: 16px;
   padding-bottom: 8px;
-  /* Updated border color to slate */
   border-bottom: 1px solid #eb6123;
   font-family: "Ramabhadra", sans-serif;
 }
@@ -73,8 +74,7 @@ body {
 }
 
 .sidebar-nav a {
-  /* Updated link color to light blue-gray */
-  color: #e2e8f0;
+  color: #eb6123;
   text-decoration: none;
   padding: 10px 14px;
   display: block;
@@ -85,35 +85,30 @@ body {
 }
 
 .sidebar-nav a:hover {
-  /* Updated hover background to #1a1a1a */
-  background-color: #1a1a1a;
-  /* Updated hover color from orange to purple */
-  color: #eb6123;
+  /* Updated hover background to glassmorphism */
+  background-color: rgba(201, 68, 7, 0.377);
+  backdrop-filter: blur(12px);
+  color: #000000;
 }
 
 .sidebar-nav a.active {
-  /* Updated active background from orange to purple */
   background-color: #eb6123;
-  /* Updated active text color to dark slate */
   color: #020202;
   font-weight: 400;
 }
 
 .sidebar-footer {
-  position: absolute;
-  bottom: 32px;
-  width: calc(100% - 40px);
+  padding: 0 20px 32px 20px;
 }
 
+
 .sidebar-footer h3 {
-  /* Updated footer header color to slate */
-  color: #943d15;
+  color: #eb6123;
   font-size: 16px;
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-bottom: 16px;
   padding-bottom: 8px;
-  /* Updated border color to slate */
   border-bottom: 1px solid #eb6123;
   font-family: "Ramabhadra", sans-serif;
 }
@@ -130,10 +125,10 @@ body {
   gap: 8px;
   padding: 10px 14px;
   margin-bottom: 12px;
-  /* Updated footer link background to #1a1a1a */
-  background-color: #1a1a1a;
-  /* Updated footer link text to white */
-  color: #ffffff;
+  /* Updated footer link background to glassmorphism */
+  background-color: rgba(17, 17, 17, 0.4);
+  backdrop-filter: blur(4px);
+  color: #eb6123;
   font-weight: 400;
   border-radius: 4px;
   transition: all 0.2s;
@@ -145,8 +140,8 @@ body {
 }
 
 .sidebar-footer a:hover {
-  /* Updated footer link hover to brighter purple */
-  background-color: #eb6123;
+  background-color: #e94c0350;
+  backdrop-filter: blur(12px);
   transform: translateX(4px);
 }
 
@@ -157,17 +152,15 @@ body {
   min-height: 100vh;
 }
 
-/* Remove underlines from all links site-wide */
 a {
   text-decoration: none;
 }
 
-/* Add spinning emoji animation and glow effect */
 .spinning-emoji {
   display: inline-block;
   animation: spin 2s linear infinite;
   margin-right: 8px;
-  filter: drop-shadow(0 0 8px #ec4899);
+  filter: drop-shadow(0 0 8px #ec489a);
 }
 
 @keyframes spin {
@@ -202,13 +195,16 @@ a {
     border-bottom: 1px solid #eb6123;
     padding: 20px 16px;
     overflow: visible;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sidebar-nav {
+    flex: 1;
   }
 
   .sidebar-footer {
-    position: relative;
-    bottom: auto;
-    width: 100%;
-    margin-top: 30px;
+    padding: 0 16px 20px 16px;
   }
 
   .main-content {

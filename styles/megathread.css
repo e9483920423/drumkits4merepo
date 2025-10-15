@@ -8,10 +8,12 @@
   border: 1px solid #444;
   border-radius: 8px;
   overflow: hidden;
+  background-color: rgba(17, 17, 17, 0.1);
+  backdrop-filter: blur(5px);
 }
 
 .collapsible-header {
-  background-color: #111;
+  background-color: #0a0a0ac2;
   padding: 16px 20px;
   cursor: pointer;
   display: flex;
@@ -22,11 +24,15 @@
 }
 
 .collapsible-header:hover {
-  background-color: #222;
+  background-color: #14141471;
+  backdrop-filter: blur(25px);
+
 }
 
 .collapsible-header:hover h2 {
-  text-shadow: 0 0 10px #eb6123;
+  text-shadow: 0 0 14px #c0460d54;
+    backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
 }
 
 .collapsible-header h2 {
@@ -48,7 +54,7 @@
 }
 
 .collapsible-content {
-  background-color: #111111;
+  background-color: #070707e5;
   padding: 0;
   max-height: 0;
   overflow: hidden;
@@ -110,7 +116,6 @@ h2::before {
   visibility: hidden;
 }
 
-/* Update list styling to use divs instead of li elements */
 .link-container {
   display: flex;
   flex-direction: column;
@@ -119,14 +124,15 @@ h2::before {
 
 .link-item {
   padding: 8px 12px;
-  background-color: #111111;
+  background-color: rgba(17, 17, 17, 0.4);
+  backdrop-filter: blur(12px);
   border: 1px solid #444;
   border-radius: 4px;
   transition: all 0.2s;
 }
 
 .link-item:hover {
-  background-color: #1a1a1a;
+  background-color: rgba(26, 26, 26, 0.6);
   border-color: #666;
 }
 
@@ -136,7 +142,6 @@ h2::before {
   width: 100%;
 }
 
-/* Adding footer styling for promotion section */
 .promotion-footer {
   background-color: #111111;
   border-top: 1px solid #444;
@@ -172,7 +177,6 @@ h2::before {
   box-shadow: 0 0 15px #c23f024b;
 }
 
-/* Adding spinning emoji styles */
 .special-link {
   display: flex;
   align-items: center;
@@ -182,7 +186,7 @@ h2::before {
 .spinning-emoji {
   display: inline-block;
   animation: spin 2s linear infinite;
-  filter: drop-shadow(0 0 8px #ec4899);
+  filter: drop-shadow(0 0 8px #f54e004f);
 }
 
 @keyframes spin {

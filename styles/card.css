@@ -1,33 +1,29 @@
 .card {
-  /* Updated card background to #111111 */
-  background-color: #111111;
-  /* Updated border color to slate */
+  /* Updated card background to glassy rgba */
+  background-color: rgba(17, 17, 17, 0.3);
+  backdrop-filter: blur(15px);
   border: 1px solid #eb6123;
   border-radius: 8px;
   padding: 24px;
   margin-bottom: 32px;
-  /* Updated shadow color to cyan */
   box-shadow: 0 4px 8px #943d151e;
   transition: all 0.3s ease;
 }
 
 .card:hover {
   transform: translateY(-2px);
-  /* Updated hover background to #1a1a1a */
-  background-color: #1a1a1a;
-  /* Updated hover shadow to cyan */
+  /* Updated hover background to glassy rgba */
+  background-color: rgba(26, 26, 26, 0.5);
   box-shadow: 0 8px 16px #943d152c;
 }
 
 .card h2 {
   font-size: 26px;
-  /* Updated heading color to cyan */
   color: #eb6123;
   text-transform: uppercase;
   letter-spacing: -0.5px;
   margin-top: 0;
   margin-bottom: 16px;
-  /* Updated border color to slate */
   border-bottom: 2px solid #eb6123;
   padding-bottom: 6px;
   display: block;
@@ -41,9 +37,7 @@
 
 .card a {
   padding: 10px 14px;
-  /* Updated link background to dark slate */
   background-color: #020202;
-  /* Updated border color to slate */
   border: 1px solid #eb6123;
   border-radius: 4px;
   display: inline-block;
@@ -51,9 +45,7 @@
 }
 
 .card a:hover {
-  /* Updated hover background to #1a1a1a */
   background-color: #1a1a1a;
-  /* Updated hover border to lighter slate */
   border-color: #64748b;
   transform: translateX(4px);
 }
@@ -65,9 +57,7 @@
 }
 
 .card.socials a {
-  /* Updated socials background to purple */
   background-color: #eb6123;
-  /* Updated socials text to dark slate */
   color: #020202;
   font-weight: 700;
   text-align: center;
@@ -76,24 +66,19 @@
 }
 
 .card.socials a:hover {
-  /* Updated socials hover to brighter purple */
   background-color: #eb6223e0;
-  /* Updated socials hover text to dark slate */
   color: #020202;
 }
 
 .footer {
   margin-top: 60px;
   padding-top: 20px;
-  /* Updated footer border to slate */
   border-top: 1px solid #eb6123;
   text-align: center;
-  /* Updated footer text to slate */
   color: #943d15;
   font-size: 14px;
 }
 
 .footer a {
-  /* Updated footer link to purple */
   color: #eb6123;
 }
