@@ -1,7 +1,7 @@
 {
   "buildCommand": "echo 'Static HTML site'",
   "outputDirectory": "./",
-  "installCommand": "echo 'No dependencies to install'",
+  "installCommand": "npm install",
   "framework": null,
   "redirects": [
     {
