@@ -79,7 +79,7 @@
 }
 
 .item-list a:hover {
-  color: #0f172a;
+  color: #020202;
   /* Updated item link hover background from orange to purple */
   background-color: #eb6123;
   padding: 2px 4px;
@@ -208,7 +208,7 @@
 
 .search-button {
   background-color: #eb6123;
-  color: #0f172a;
+  color: #020202;
   font-weight: bold;
   padding: 0 24px;
   border: none;

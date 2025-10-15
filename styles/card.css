@@ -42,7 +42,7 @@
 .card a {
   padding: 10px 14px;
   /* Updated link background to dark slate */
-  background-color: #0f172a;
+  background-color: #020202;
   /* Updated border color to slate */
   border: 1px solid #eb6123;
   border-radius: 4px;
@@ -68,7 +68,7 @@
   /* Updated socials background to purple */
   background-color: #eb6123;
   /* Updated socials text to dark slate */
-  color: #0f172a;
+  color: #020202;
   font-weight: 700;
   text-align: center;
   flex: 1;
@@ -79,7 +79,7 @@
   /* Updated socials hover to brighter purple */
   background-color: #eb6223e0;
   /* Updated socials hover text to dark slate */
-  color: #0f172a;
+  color: #020202;
 }
 
 .footer {
