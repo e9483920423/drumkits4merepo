@@ -160,7 +160,7 @@ a {
   display: inline-block;
   animation: spin 2s linear infinite;
   margin-right: 8px;
-  filter: drop-shadow(0 0 8px #ec489a);
+  filter: drop-shadow(0 0 8px #eb6123);
 }
 
 @keyframes spin {
@@ -173,13 +173,12 @@ a {
 }
 
 .special-link {
-  color: #ec4899;
+  color: #eb622323;
   transition: all 0.3s ease;
 }
 
 .special-link:hover {
-  filter: drop-shadow(0 0 12px #ec4899);
-  text-shadow: 0 0 8px #ec4899;
+  text-shadow: 0 0 10px #e74c04b7;
 }
 
 @media (max-width: 768px) {
