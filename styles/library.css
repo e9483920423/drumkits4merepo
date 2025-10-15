@@ -27,7 +27,7 @@
   color: #e2e8f0;
   font-size: 18px;
   padding: 14px 16px;
-  border: 2px solid #475569;
+  border: 2px solid #eb6123;
   border-radius: 0;
   outline: none;
   transition: border-color 0.2s;
@@ -42,7 +42,7 @@
 }
 
 #searchInput::placeholder {
-  color: #94a3b8;
+  color: #943d15;
 }
 
 .item-list {
@@ -55,7 +55,7 @@
 }
 
 .item-list > div {
-  border: 1px solid #475569;
+  border: 1px solid #eb6123;
   padding: 14px;
   background-color: #111111;
   transition: all 0.2s ease;
@@ -79,7 +79,7 @@
 }
 
 .item-list a:hover {
-  color: #0f172a;
+  color: #020202;
   /* Updated item link hover background from orange to purple */
   background-color: #eb6123;
   padding: 2px 4px;
@@ -89,7 +89,7 @@
 .status-indicator {
   font-family: "Ramabhadra", sans-serif;
   font-size: 14px;
-  color: #94a3b8;
+  color: #943d15;
   margin-top: 8px;
 }
 
@@ -148,7 +148,7 @@
   margin-bottom: 40px;
   padding: 30px;
   background-color: #111111;
-  border: 1px solid #475569;
+  border: 1px solid #eb6123;
   border-radius: 8px;
 }
 
@@ -176,7 +176,7 @@
   color: #e2e8f0;
   font-size: 16px;
   padding: 12px 16px;
-  border: 2px solid #475569;
+  border: 2px solid #eb6123;
   border-radius: 4px;
   outline: none;
   font-family: "Ramabhadra", sans-serif;
@@ -190,7 +190,7 @@
   background-color: #1a1a1a;
   color: #e2e8f0;
   padding: 0 16px;
-  border: 2px solid #475569;
+  border: 2px solid #eb6123;
   border-radius: 4px;
   font-family: "Ramabhadra", sans-serif;
   cursor: pointer;
@@ -208,7 +208,7 @@
 
 .search-button {
   background-color: #eb6123;
-  color: #0f172a;
+  color: #020202;
   font-weight: bold;
   padding: 0 24px;
   border: none;
