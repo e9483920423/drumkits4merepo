@@ -1,0 +1,84 @@
+.card {
+  /* Updated card background to glassy rgba */
+  background-color: rgba(17, 17, 17, 0.3);
+  backdrop-filter: blur(15px);
+  border: 1px solid #eb6123;
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 32px;
+  box-shadow: 0 4px 8px #943d151e;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  /* Updated hover background to glassy rgba */
+  background-color: rgba(26, 26, 26, 0.5);
+  box-shadow: 0 8px 16px #943d152c;
+}
+
+.card h2 {
+  font-size: 26px;
+  color: #eb6123;
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
+  margin-top: 0;
+  margin-bottom: 16px;
+  border-bottom: 2px solid #eb6123;
+  padding-bottom: 6px;
+  display: block;
+}
+
+.card ul {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.card a {
+  padding: 10px 14px;
+  background-color: #020202;
+  border: 1px solid #eb6123;
+  border-radius: 4px;
+  display: inline-block;
+  transition: all 0.2s ease;
+}
+
+.card a:hover {
+  background-color: #1a1a1a;
+  border-color: #64748b;
+  transform: translateX(4px);
+}
+
+.card.socials ul {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.card.socials a {
+  background-color: #eb6123;
+  color: #020202;
+  font-weight: 700;
+  text-align: center;
+  flex: 1;
+  min-width: 120px;
+}
+
+.card.socials a:hover {
+  background-color: #eb6223e0;
+  color: #020202;
+}
+
+.footer {
+  margin-top: 60px;
+  padding-top: 20px;
+  border-top: 1px solid #eb6123;
+  text-align: center;
+  color: #943d15;
+  font-size: 14px;
+}
+
+.footer a {
+  color: #eb6123;
+}

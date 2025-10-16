@@ -1,0 +1,239 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.ramabhadra-regular {
+  font-family: "Ramabhadra", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+body {
+  /* Removed static background image, replaced with black for ASCII wave canvas */
+  background-color: #000000;
+  color: #eb6123;
+  font-family: "Ramabhadra", sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  padding: 0;
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  position: relative;
+}
+
+/* Added styles for ASCII wave background canvas */
+#ascii-wave-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  cursor: crosshair;
+}
+
+.sidebar {
+  width: 280px;
+  /* Updated sidebar to glassmorphism with flexbox layout */
+  background-color: rgba(17, 17, 17, 0.1);
+  backdrop-filter: blur(10px);
+  border-right: 1px solid rgba(235, 97, 35, 0.3);
+  position: fixed;
+  height: 100vh;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar h1 {
+  font-size: 28px;
+  margin-bottom: 40px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 32px;
+  color: #943d15;
+  letter-spacing: -1px;
+  border-bottom: 3px solid #eb6123;
+  padding-bottom: 6px;
+  font-family: "Ramabhadra", sans-serif;
+}
+
+.sidebar-nav {
+  flex: 1;
+  padding: 0 20px;
+}
+
+.sidebar-nav h3 {
+  color: #eb6123;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #eb6123;
+  font-family: "Ramabhadra", sans-serif;
+}
+
+.sidebar-nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar-nav a {
+  color: #eb6123;
+  text-decoration: none;
+  padding: 10px 14px;
+  display: block;
+  border-radius: 4px;
+  transition: all 0.2s;
+  font-family: "Ramabhadra", sans-serif;
+  margin-bottom: 8px;
+}
+
+.sidebar-nav a:hover {
+  /* Updated hover background to glassmorphism */
+  background-color: rgba(201, 68, 7, 0.377);
+  backdrop-filter: blur(12px);
+  color: #000000;
+}
+
+.sidebar-nav a.active {
+  background-color: #eb6123;
+  color: #020202;
+  font-weight: 400;
+}
+
+.sidebar-footer {
+  padding: 0 20px 32px 20px;
+}
+
+.sidebar-footer h3 {
+  color: #eb6123;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #eb6123;
+  font-family: "Ramabhadra", sans-serif;
+}
+
+.sidebar-footer ul {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar-footer a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  margin-bottom: 12px;
+  /* Updated footer link background to glassmorphism */
+  background-color: rgba(17, 17, 17, 0.4);
+  backdrop-filter: blur(4px);
+  color: #eb6123;
+  font-weight: 400;
+  border-radius: 4px;
+  transition: all 0.2s;
+  font-family: "Ramabhadra", sans-serif;
+}
+
+.sidebar-footer a:last-child {
+  margin-bottom: 0;
+}
+
+.sidebar-footer a:hover {
+  background-color: #e94c0350;
+  backdrop-filter: blur(12px);
+  transform: translateX(4px);
+}
+
+.main-content {
+  flex: 1;
+  margin-left: 280px;
+  padding: 32px 20px;
+  min-height: 100vh;
+}
+
+a {
+  text-decoration: none;
+}
+
+.spinning-emoji {
+  display: inline-block;
+  animation: spin 2s linear infinite;
+  margin-right: 8px;
+  filter: drop-shadow(0 0 8px #eb6123);
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.special-link {
+  color: #eb622323;
+  transition: all 0.3s ease;
+}
+
+.special-link:hover {
+  text-shadow: 0 0 10px #e74c04b7;
+}
+
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+    border-right: none;
+    border-bottom: 1px solid #eb6123;
+    padding: 20px 16px;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sidebar-nav {
+    flex: 1;
+  }
+
+  .sidebar-footer {
+    padding: 0 16px 20px 16px;
+  }
+
+  .main-content {
+    margin-left: 0;
+    padding: 20px 16px;
+    width: 100%;
+  }
+
+  .external-search-box {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .external-search-box input,
+  .external-search-box select,
+  .external-search-box button {
+    width: 100%;
+    margin: 0;
+  }
+
+  #siteSelector,
+  .search-button {
+    height: 45px;
+  }
+}
