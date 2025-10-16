@@ -1,37 +1,31 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, memo } from "react"
 
 const CONFIG = {
-  // Brightness threshold: higher = more black spots, less ASCII (range: 0-255)
-  // Try values between 40-100 for different effects
   BRIGHTNESS_THRESHOLD: 30,
-
-  // Mouse dither influence radius (in characters)
-  MOUSE_DITHER_RADIUS: 20,
-
-  // Mouse dither intensity (0-1, higher = stronger effect)
+  MOUSE_DITHER_RADIUS: 15,
   MOUSE_DITHER_INTENSITY: 1,
-
   CHARACTER_SPACING: 1.5,
-
-  // RENDER_SCALE: Reduces canvas resolution (0.5 = half resolution, 1 = full resolution)
   RENDER_SCALE: 1,
-
-  // ADAPTIVE_QUALITY: Automatically reduce quality if frame rate drops
-  ADAPTIVE_QUALITY: false,
-
+  ADAPTIVE_QUALITY: true,
   TARGET_FPS_LOW: 50,
   TARGET_FPS_HIGH: 70,
   QUALITY_CHANGE_COOLDOWN: 15000,
   FPS_SAMPLE_SIZE: 30,
   QUALITY_SETTLING_PERIOD: 3000,
+  MOUSE_DEBOUNCE_MS: 16,
 }
 
-export default function AsciiWaveBackground() {
+const AsciiWaveBackground = memo(function AsciiWaveBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const offscreenCanvasRef = useRef<HTMLCanvasElement | null>(null)
+  const offscreenCtxRef = useRef<CanvasRenderingContext2D | null>(null)
   const mousePos = useRef({ x: -1000, y: -1000 })
   const mouseMoveScheduled = useRef(false)
+  const lastMouseUpdateRef = useRef(0)
+  const isInteractingRef = useRef(false)
+  const interactionTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   const frameTimesRef = useRef<number[]>([])
   const lastFrameTimeRef = useRef(performance.now())
@@ -50,6 +44,13 @@ export default function AsciiWaveBackground() {
       desynchronized: true,
     })
     if (!ctx) return
+
+    offscreenCanvasRef.current = document.createElement("canvas")
+    offscreenCtxRef.current = offscreenCanvasRef.current.getContext("2d", {
+      alpha: false,
+      desynchronized: true,
+    })
+    if (!offscreenCtxRef.current) return
 
     const darkChars = [
       "*",
@@ -99,7 +100,7 @@ export default function AsciiWaveBackground() {
     let phaseShiftY = 0
     let distortionIntensity = 1
 
-    const fontSize =7
+    const fontSize = 7
     const charWidth = fontSize * 0.7
     const charHeight = fontSize * 0.9
 
@@ -112,6 +113,13 @@ export default function AsciiWaveBackground() {
       canvas.height = window.innerHeight * scale
       canvas.style.width = `${window.innerWidth}px`
       canvas.style.height = `${window.innerHeight}px`
+
+      if (offscreenCanvasRef.current && offscreenCtxRef.current) {
+        offscreenCanvasRef.current.width = canvas.width
+        offscreenCanvasRef.current.height = canvas.height
+        offscreenCtxRef.current.font = `${fontSize}px 'JetBrains Mono', monospace`
+        offscreenCtxRef.current.textBaseline = "top"
+      }
 
       const cols = Math.floor(canvas.width / charWidth)
       const rows = Math.floor(canvas.height / charHeight)
@@ -216,18 +224,23 @@ export default function AsciiWaveBackground() {
     const animate = () => {
       updateFrameRate()
 
-      ctx.fillStyle = "#000000"
-      ctx.fillRect(0, 0, canvas.width, canvas.height)
+      const renderCtx = offscreenCtxRef.current
+      if (!renderCtx || !offscreenCanvasRef.current) return
+
+      renderCtx.fillStyle = "#000000"
+      renderCtx.fillRect(0, 0, offscreenCanvasRef.current.width, offscreenCanvasRef.current.height)
+
+      const complexityMultiplier = isInteractingRef.current ? 0.5 : 1
 
       frequencyBase = 2.5 + Math.sin(time * 0.008) * 0.4
 
       phaseShiftX = Math.sin(time * 0.015) * Math.PI
       phaseShiftY = Math.cos(time * 0.013) * Math.PI
 
-      distortionIntensity = 0.3 + Math.sin(time * 0.02) * 1
+      distortionIntensity = (0.3 + Math.sin(time * 0.02) * 1) * complexityMultiplier
 
-      xOffsetPhase += 0.045
-      yOffsetPhase += 0.038
+      xOffsetPhase += 0.045 * complexityMultiplier
+      yOffsetPhase += 0.038 * complexityMultiplier
 
       const mouseColPos = mousePos.current.x / charWidth
       const mouseRowPos = mousePos.current.y / charHeight
@@ -298,16 +311,17 @@ export default function AsciiWaveBackground() {
             const newFillStyle = `rgb(${finalIntensity}, ${finalIntensity}, ${finalIntensity})`
 
             if (newFillStyle !== lastFillStyle) {
-              ctx.fillStyle = newFillStyle
+              renderCtx.fillStyle = newFillStyle
               lastFillStyle = newFillStyle
             }
 
-            ctx.fillText(char, renderCol * charWidth, renderRow * charHeight)
+            renderCtx.fillText(char, renderCol * charWidth, renderRow * charHeight)
           }
         }
       }
 
-      //animation speed
+      ctx.drawImage(offscreenCanvasRef.current, 0, 0)
+
       time += 0.35
       animationFrameId = requestAnimationFrame(animate)
     }
@@ -315,8 +329,12 @@ export default function AsciiWaveBackground() {
     animate()
 
     const handleMouseMove = (e: MouseEvent) => {
-      if (!mouseMoveScheduled.current) {
+      const now = performance.now()
+
+      if (!mouseMoveScheduled.current && now - lastMouseUpdateRef.current >= CONFIG.MOUSE_DEBOUNCE_MS) {
         mouseMoveScheduled.current = true
+        lastMouseUpdateRef.current = now
+
         requestAnimationFrame(() => {
           const rect = canvas.getBoundingClientRect()
           mousePos.current = {
@@ -326,6 +344,14 @@ export default function AsciiWaveBackground() {
           mouseMoveScheduled.current = false
         })
       }
+
+      isInteractingRef.current = true
+      if (interactionTimeoutRef.current) {
+        clearTimeout(interactionTimeoutRef.current)
+      }
+      interactionTimeoutRef.current = setTimeout(() => {
+        isInteractingRef.current = false
+      }, 150)
     }
 
     canvas.addEventListener("mousemove", handleMouseMove, { passive: true })
@@ -333,9 +359,28 @@ export default function AsciiWaveBackground() {
     return () => {
       window.removeEventListener("resize", handleResize)
       canvas.removeEventListener("mousemove", handleMouseMove)
+      if (interactionTimeoutRef.current) {
+        clearTimeout(interactionTimeoutRef.current)
+      }
       cancelAnimationFrame(animationFrameId)
     }
   }, [])
 
-  return <canvas ref={canvasRef} className="fixed inset-0 h-full w-full cursor-crosshair" aria-hidden="true" />
-}
+  return (
+    <canvas
+      ref={canvasRef}
+      className="fixed inset-0 h-full w-full cursor-crosshair"
+      style={{
+        willChange: "transform",
+        transform: "translate3d(0, 0, 0)",
+        contain: "layout style paint",
+        isolation: "isolate",
+        zIndex: -1,
+        pointerEvents: "none",
+      }}
+      aria-hidden="true"
+    />
+  )
+})
+
+export default AsciiWaveBackground

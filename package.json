@@ -3,9 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "echo 'no build script'"
+    "build": "next build",
+    "dev": "next dev",
+    "lint": "eslint .",
+    "start": "next start"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.10.0",
     "@radix-ui/react-accordion": "latest",
     "@radix-ui/react-alert-dialog": "latest",
     "@radix-ui/react-aspect-ratio": "latest",
@@ -33,14 +37,13 @@
     "@radix-ui/react-toggle": "latest",
     "@radix-ui/react-toggle-group": "latest",
     "@radix-ui/react-tooltip": "latest",
-    "@types/react": "latest",
-    "@types/react-dom": "latest",
     "@vercel/analytics": "latest",
+    "autoprefixer": "^10.4.20",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "latest",
+    "date-fns": "4.1.0",
     "embla-carousel-react": "latest",
-    "geist": "latest",
     "input-otp": "latest",
     "lucide-react": "^0.454.0",
     "next": "15.2.4",
@@ -54,14 +57,17 @@
     "sonner": "latest",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
-    "tw-animate-css": "latest",
-    "vaul": "latest"
+    "vaul": "latest",
+    "zod": "3.25.76"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.9",
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "postcss": "^8.5",
+    "tailwindcss": "^4.1.9",
+    "tw-animate-css": "1.3.3",
     "typescript": "^5"
   }
 }
