@@ -31,8 +31,9 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 0;
+  z-index: -1; /* Lowered z-index to -1 to ensure canvas stays behind all content */
   cursor: crosshair;
+  pointer-events: none;
 }
 
 .sidebar {
@@ -158,6 +159,8 @@ body {
   margin-left: 280px;
   padding: 32px 20px;
   min-height: 100vh;
+  position: relative; /* Added position relative and z-index to create proper stacking context above canvas */
+  z-index: 1;
 }
 
 a {

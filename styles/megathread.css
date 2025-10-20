@@ -26,7 +26,6 @@
 .collapsible-header:hover {
   background-color: #14141471;
   backdrop-filter: blur(25px);
-
 }
 
 .collapsible-header:hover h2 {
@@ -152,6 +151,8 @@ h2::before {
   border-radius: 8px;
   padding: 20px;
   text-align: center;
+  position: relative;
+  z-index: 2;
 }
 
 .footer-content {
