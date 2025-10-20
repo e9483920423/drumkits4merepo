@@ -1,7 +1,7 @@
 .card {
   /* Updated card background to glassy rgba */
   background-color: rgba(17, 17, 17, 0.3);
-  backdrop-filter: blur(15px);
+  backdrop-filter: blur(25px);
   border: 1px solid #eb6123;
   border-radius: 8px;
   padding: 24px;

@@ -40,7 +40,7 @@ body {
   width: 280px;
   /* Updated sidebar to glassmorphism with flexbox layout */
   background-color: rgba(17, 17, 17, 0.1);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(25px);
   border-right: 1px solid rgba(235, 97, 35, 0.3);
   position: fixed;
   height: 100vh;
@@ -97,7 +97,7 @@ body {
 .sidebar-nav a:hover {
   /* Updated hover background to glassmorphism */
   background-color: rgba(201, 68, 7, 0.377);
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(15px);
   color: #000000;
 }
 
